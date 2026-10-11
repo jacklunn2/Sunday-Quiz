@@ -121,6 +121,10 @@
   }
 
   // Rounds: a quiz of 20 or more questions, in tens, is split into rounds of ten.
+  // The three rounds are the same every week. Questions 1-10 belong to the
+  // first, 11-20 to the second and 21-30 to the third.
+  const ROUND_NAMES = ['Australia', 'The World', 'Sport & Culture'];
+  const roundName = (r, rounds) => (rounds === ROUND_NAMES.length ? ROUND_NAMES[r] : `Round ${r + 1}`);
   const ROUND = 10;
   const roundsOf = (n) => (n >= 20 && n % ROUND === 0 ? n / ROUND : 1);
   const colourOf = (i, n) => `c${roundsOf(n) > 1 ? Math.floor(i / ROUND) % 3 : 0}`;
@@ -143,7 +147,7 @@
     const quiz = await loadQuiz(latest.id).catch(() => null);
     const qs = quiz ? quiz.questions : [];
     const picks = (qs.length > 20 ? [0, 10, 20] : [0, 1, 2]).filter((i) => i < qs.length);
-    const cats = [...new Set(qs.map((q) => q.category).filter(Boolean))];
+    const cats = qs.length > 20 ? ROUND_NAMES.concat(ROUND_NAMES) : [...new Set(qs.map((q) => q.category).filter(Boolean))];
     const run = cats.map((c) => `${esc(c)}<i>✺</i>`).join('');
     app.innerHTML = `<div class="view">
       <section class="lead blk c0" aria-labelledby="lead-title">
@@ -159,14 +163,14 @@
       </section>
 
       ${cats.length ? `<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>${run}</span><span>${run}</span></div></div>
-      <p class="sr">This week's subjects: ${esc(cats.join(', '))}.</p>` : ''}
+      <p class="sr">Three rounds: ${esc(ROUND_NAMES.join(', '))}.</p>` : ''}
 
       ${picks.length ? `<section aria-labelledby="taste-title">
         <div class="section-head"><h2 class="shout" id="taste-title">Three to get you started</h2><a href="${s.href}">Play all ${esc(latest.questionCount)}</a></div>
         <div class="teasers">
           ${picks.map((i, k) => `<a class="teaser blk c${k}" href="${s.href}">
             <span class="teaser-num shout" aria-hidden="true">${i + 1}<small>?</small></span>
-            ${qs[i].category ? `<span class="eyebrow">${esc(qs[i].category)}</span>` : ''}
+            <span class="eyebrow">${esc(qs.length > 20 ? roundName(k, 3) : (qs[i].category || ''))}</span>
             <span class="teaser-q"><span class="sr">Question ${i + 1}. </span>${esc(qs[i].question)}</span>
           </a>`).join('')}
         </div>
@@ -175,7 +179,7 @@
       <section class="steps slab" aria-labelledby="steps-title">
         <h2 class="shout" id="steps-title">How it works</h2>
         <ol>
-          <li><span class="step-num shout" aria-hidden="true">1</span><h3>Have a think</h3><p>Read the question and settle on an answer, on your own or out loud with the table.</p></li>
+          <li><span class="step-num shout" aria-hidden="true">1</span><h3>Have a think</h3><p>Three rounds of ten: Australia, The World, then Sport and Culture. Settle on an answer, on your own or out loud with the table.</p></li>
           <li><span class="step-num shout" aria-hidden="true">2</span><h3>Show the answer</h3><p>Tap the button. Every answer comes with a short explanation, so you learn something either way.</p></li>
           <li><span class="step-num shout" aria-hidden="true">3</span><h3>Mark yourself</h3><p>Got it or missed it. Your score adds up as you go, so be honest.</p></li>
         </ol>
@@ -233,7 +237,7 @@
       const from = rounds > 1 ? r * ROUND : 0;
       const to = rounds > 1 ? from + ROUND : n;
       body += `<section class="round c${r % 3} ${rounds > 1 ? 'has-head' : ''}" ${rounds > 1 ? `aria-labelledby="round-${r}"` : 'aria-label="Questions"'}>
-        ${rounds > 1 ? `<header class="round-head blk"><h2 class="shout" id="round-${r}">Round ${r + 1}</h2><p>Questions ${from + 1} to ${to}</p></header>` : ''}
+        ${rounds > 1 ? `<header class="round-head blk"><h2 class="shout" id="round-${r}">${esc(roundName(r, rounds))}</h2><p>Round ${r + 1} · Questions ${from + 1} to ${to}</p></header>` : ''}
         <ol class="items" start="${from + 1}">${quiz.questions.slice(from, to).map((q, k) => item(q, from + k)).join('')}</ol>
       </section>`;
     }
@@ -241,7 +245,7 @@
       <header class="quiz-head">
         <p class="eyebrow">No. ${esc(quiz.number)} · ${esc(formatDate(quiz.date))} ${sampleTag(quiz)}</p>
         <h1 class="shout">${esc(quiz.title)}</h1>
-        <p>${n} questions${rounds > 1 ? ` in ${rounds} rounds` : ''}. Decide on your answer, reveal it, then mark yourself.</p>
+        <p>${n} questions${rounds === 3 ? `: ten on ${ROUND_NAMES[0]}, ten on ${ROUND_NAMES[1]} and ten on ${ROUND_NAMES[2]}` : ''}. Decide on your answer, reveal it, then mark yourself.</p>
       </header>
       ${body}
       <div id="finish-notice"></div>
@@ -350,7 +354,7 @@
       </section>
 
       ${rounds > 1 ? `<ol class="round-scores" aria-label="Score by round">
-        ${Array.from({ length: rounds }, (_, r) => `<li class="blk c${r % 3}"><span class="eyebrow">Round ${r + 1}</span><b class="shout">${roundScore(r)}/${ROUND}</b></li>`).join('')}
+        ${Array.from({ length: rounds }, (_, r) => `<li class="blk c${r % 3}"><span class="eyebrow">${esc(roundName(r, rounds))}</span><b class="shout">${roundScore(r)}/${ROUND}</b></li>`).join('')}
       </ol>` : ''}
 
       <section aria-labelledby="review-title">

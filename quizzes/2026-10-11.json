@@ -20,90 +20,6 @@
       "source": "Geoscience Australia, Longest Rivers"
     },
     {
-      "category": "Sport",
-      "question": "Which horse won the Melbourne Cup three years in a row, in 2003, 2004 and 2005?",
-      "answer": "Makybe Diva",
-      "explanation": "Makybe Diva is the only horse to win the Cup three times. Phar Lap, for all his fame, won it once, in 1930.",
-      "source": "Victoria Racing Club, Melbourne Cup honour roll"
-    },
-    {
-      "category": "Science",
-      "question": "Which gas makes up most of Earth's atmosphere?",
-      "answer": "Nitrogen",
-      "explanation": "Nitrogen accounts for about 78 per cent of dry air. Oxygen is about 21 per cent, and carbon dioxide is well under a tenth of one per cent.",
-      "source": "NASA Earth Fact Sheet"
-    },
-    {
-      "category": "Film",
-      "question": "Which Australian-made film won the Academy Award for Best Animated Feature in 2007?",
-      "answer": "Happy Feet",
-      "explanation": "George Miller's Happy Feet, animated in Sydney, won at the 79th Academy Awards. Miller is better known for the Mad Max films.",
-      "source": "Academy of Motion Picture Arts and Sciences, 79th Awards"
-    },
-    {
-      "category": "World geography",
-      "question": "Lake Baikal, the deepest lake in the world, is in which country?",
-      "answer": "Russia",
-      "explanation": "Baikal, in Siberia, reaches a depth of more than 1,600 metres and holds roughly a fifth of the world's unfrozen surface fresh water.",
-      "source": "UNESCO World Heritage List, Lake Baikal"
-    },
-    {
-      "category": "Literature",
-      "question": "Which Australian author won the Nobel Prize in Literature in 1973?",
-      "answer": "Patrick White",
-      "explanation": "Patrick White, author of Voss and The Tree of Man, remains the only Australian to win the literature prize. He used the money to establish an award for under-recognised Australian writers.",
-      "source": "NobelPrize.org, Literature 1973"
-    },
-    {
-      "category": "Music",
-      "question": "Which band released the 1987 album Diesel and Dust, featuring the song Beds Are Burning?",
-      "answer": "Midnight Oil",
-      "explanation": "Midnight Oil wrote the album after touring remote Aboriginal communities in 1986. Beds Are Burning is about returning land to the Pintupi people.",
-      "source": "National Film and Sound Archive of Australia"
-    },
-    {
-      "category": "Nature",
-      "question": "The platypus is a monotreme, a mammal that lays eggs. Which other animal belongs to this group?",
-      "answer": "The echidna",
-      "explanation": "The platypus and four species of echidna are the only living monotremes. All are found in Australia or New Guinea.",
-      "source": "Australian Museum"
-    },
-    {
-      "category": "World history",
-      "question": "In which year did the Berlin Wall come down?",
-      "answer": "1989",
-      "explanation": "The border was opened on 9 November 1989, after 28 years. Germany was formally reunified in October 1990.",
-      "source": "Berlin Wall Foundation"
-    },
-    {
-      "category": "Sport",
-      "question": "Which of the four tennis Grand Slam tournaments is played on clay?",
-      "answer": "The French Open (Roland Garros)",
-      "explanation": "The French Open is played on red clay at Roland Garros in Paris. Wimbledon is on grass, and the Australian and US Opens are on hard courts.",
-      "source": "International Tennis Federation"
-    },
-    {
-      "category": "Technology",
-      "question": "Research patented by CSIRO scientists in the 1990s became a core part of which everyday wireless technology?",
-      "answer": "Wi-Fi",
-      "explanation": "A CSIRO team led by John O'Sullivan solved the problem of radio signals echoing indoors, work that grew out of radio astronomy. The patent later earned the agency hundreds of millions of dollars.",
-      "source": "CSIRO, Wireless LAN"
-    },
-    {
-      "category": "World geography",
-      "question": "Mount Kilimanjaro, the highest mountain in Africa, is in which country?",
-      "answer": "Tanzania",
-      "explanation": "Kilimanjaro stands 5,895 metres high in north-eastern Tanzania, close to the Kenyan border. It is a dormant volcano.",
-      "source": "UNESCO World Heritage List, Kilimanjaro National Park"
-    },
-    {
-      "category": "Literature",
-      "question": "Who wrote the novel Nineteen Eighty-Four?",
-      "answer": "George Orwell",
-      "explanation": "George Orwell, the pen name of Eric Blair, published the novel in 1949. It was his last book; he died the following January.",
-      "source": "The Orwell Foundation"
-    },
-    {
       "category": "Australian history",
       "question": "The Eureka Stockade rebellion of 1854 took place on the goldfields of which town?",
       "answer": "Ballarat",
@@ -118,11 +34,151 @@
       "source": "Geoscience Australia"
     },
     {
+      "category": "Nature",
+      "question": "The platypus is a monotreme, a mammal that lays eggs. Which other animal belongs to this group?",
+      "answer": "The echidna",
+      "explanation": "The platypus and four species of echidna are the only living monotremes. All are found in Australia or New Guinea.",
+      "source": "Australian Museum"
+    },
+    {
+      "category": "Australian politics",
+      "question": "Who was Australia's first female prime minister?",
+      "answer": "Julia Gillard",
+      "explanation": "Gillard held the office from June 2010 to June 2013. She was born in Barry, Wales, and migrated to Adelaide as a child.",
+      "source": "National Archives of Australia, Australia's Prime Ministers"
+    },
+    {
+      "category": "Technology",
+      "question": "Research patented by CSIRO scientists in the 1990s became a core part of which everyday wireless technology?",
+      "answer": "Wi-Fi",
+      "explanation": "A CSIRO team led by John O'Sullivan solved the problem of radio signals echoing indoors, work that grew out of radio astronomy. The patent later earned the agency hundreds of millions of dollars.",
+      "source": "CSIRO, Wireless LAN"
+    },
+    {
+      "category": "Australian history",
+      "question": "In 1928 Charles Kingsford Smith and his crew made the first flight across the Pacific from the United States to Australia. What was their aircraft called?",
+      "answer": "Southern Cross",
+      "explanation": "The Fokker trimotor flew from Oakland, California, to Brisbane with stops in Hawaii and Fiji. It is on display near Brisbane Airport.",
+      "source": "National Museum of Australia, Defining Moments"
+    },
+    {
+      "category": "Australian geography",
+      "question": "What is the largest lake in Australia?",
+      "answer": "Kati Thanda-Lake Eyre",
+      "explanation": "The South Australian salt lake fills completely only a few times a century. Its lowest point, about 15 metres below sea level, is the lowest natural point on the Australian mainland.",
+      "source": "Geoscience Australia, Largest Waterbodies"
+    },
+    {
+      "category": "Food",
+      "question": "Which nut is native to the rainforests of Queensland and northern New South Wales?",
+      "answer": "Macadamia",
+      "explanation": "The botanist Ferdinand von Mueller named the genus in 1857 after his friend John Macadam. Aboriginal people had been eating the nuts for thousands of years.",
+      "source": "Australian National Botanic Gardens"
+    },
+    {
+      "category": "World geography",
+      "question": "Lake Baikal, the deepest lake in the world, is in which country?",
+      "answer": "Russia",
+      "explanation": "Baikal, in Siberia, reaches a depth of more than 1,600 metres and holds roughly a fifth of the world's unfrozen surface fresh water.",
+      "source": "UNESCO World Heritage List, Lake Baikal"
+    },
+    {
+      "category": "World history",
+      "question": "In which year did the Berlin Wall come down?",
+      "answer": "1989",
+      "explanation": "The border was opened on 9 November 1989, after 28 years. Germany was formally reunified in October 1990.",
+      "source": "Berlin Wall Foundation"
+    },
+    {
+      "category": "Science",
+      "question": "Which gas makes up most of Earth's atmosphere?",
+      "answer": "Nitrogen",
+      "explanation": "Nitrogen accounts for about 78 per cent of dry air. Oxygen is about 21 per cent, and carbon dioxide is well under a tenth of one per cent.",
+      "source": "NASA Earth Fact Sheet"
+    },
+    {
+      "category": "World geography",
+      "question": "Mount Kilimanjaro, the highest mountain in Africa, is in which country?",
+      "answer": "Tanzania",
+      "explanation": "Kilimanjaro stands 5,895 metres high in north-eastern Tanzania, close to the Kenyan border. It is a dormant volcano.",
+      "source": "UNESCO World Heritage List, Kilimanjaro National Park"
+    },
+    {
       "category": "Science",
       "question": "What is the chemical symbol for sodium?",
       "answer": "Na",
       "explanation": "It comes from natrium, the element's Latin name. Potassium's symbol, K, has a similar origin in kalium.",
       "source": "Royal Society of Chemistry, Periodic Table"
+    },
+    {
+      "category": "World geography",
+      "question": "Which is the largest of the world's oceans?",
+      "answer": "The Pacific",
+      "explanation": "The Pacific covers about a third of the Earth's surface, more than all the land on the planet combined.",
+      "source": "NOAA, National Ocean Service"
+    },
+    {
+      "category": "World geography",
+      "question": "What is the smallest country in the world by area?",
+      "answer": "Vatican City",
+      "explanation": "It covers less than half a square kilometre, entirely within the city of Rome.",
+      "source": "Encyclopaedia Britannica, Vatican City"
+    },
+    {
+      "category": "Language",
+      "question": "How many letters are there in the Greek alphabet?",
+      "answer": "24",
+      "explanation": "It runs from alpha to omega. The word alphabet comes from its first two letters, alpha and beta.",
+      "source": "Encyclopaedia Britannica, Greek alphabet"
+    },
+    {
+      "category": "Science",
+      "question": "What is the hardest naturally occurring substance?",
+      "answer": "Diamond",
+      "explanation": "Diamond is pure carbon and scores 10 on the Mohs scale of hardness. Graphite, also pure carbon, is one of the softest minerals.",
+      "source": "Geological Society of London"
+    },
+    {
+      "category": "World geography",
+      "question": "What is the longest river in South America?",
+      "answer": "The Amazon",
+      "explanation": "The Amazon carries more water than any other river on Earth, about a fifth of all the river water that reaches the oceans.",
+      "source": "Encyclopaedia Britannica, Amazon River"
+    },
+    {
+      "category": "Sport",
+      "question": "Which horse won the Melbourne Cup three years in a row, in 2003, 2004 and 2005?",
+      "answer": "Makybe Diva",
+      "explanation": "Makybe Diva is the only horse to win the Cup three times. Phar Lap, for all his fame, won it once, in 1930.",
+      "source": "Victoria Racing Club, Melbourne Cup honour roll"
+    },
+    {
+      "category": "Film",
+      "question": "Which Australian-made film won the Academy Award for Best Animated Feature in 2007?",
+      "answer": "Happy Feet",
+      "explanation": "George Miller's Happy Feet, animated in Sydney, won at the 79th Academy Awards. Miller is better known for the Mad Max films.",
+      "source": "Academy of Motion Picture Arts and Sciences, 79th Awards"
+    },
+    {
+      "category": "Music",
+      "question": "Which band released the 1987 album Diesel and Dust, featuring the song Beds Are Burning?",
+      "answer": "Midnight Oil",
+      "explanation": "Midnight Oil wrote the album after touring remote Aboriginal communities in 1986. Beds Are Burning is about returning land to the Pintupi people.",
+      "source": "National Film and Sound Archive of Australia"
+    },
+    {
+      "category": "Sport",
+      "question": "Which of the four tennis Grand Slam tournaments is played on clay?",
+      "answer": "The French Open (Roland Garros)",
+      "explanation": "The French Open is played on red clay at Roland Garros in Paris. Wimbledon is on grass, and the Australian and US Opens are on hard courts.",
+      "source": "International Tennis Federation"
+    },
+    {
+      "category": "Literature",
+      "question": "Which Australian author won the Nobel Prize in Literature in 1973?",
+      "answer": "Patrick White",
+      "explanation": "Patrick White, author of Voss and The Tree of Man, remains the only Australian to win the literature prize. He used the money to establish an award for under-recognised Australian writers.",
+      "source": "NobelPrize.org, Literature 1973"
     },
     {
       "category": "Sport",
@@ -139,60 +195,11 @@
       "source": "American Film Institute Catalog"
     },
     {
-      "category": "Australian politics",
-      "question": "Who was Australia's first female prime minister?",
-      "answer": "Julia Gillard",
-      "explanation": "Gillard held the office from June 2010 to June 2013. She was born in Barry, Wales, and migrated to Adelaide as a child.",
-      "source": "National Archives of Australia, Australia's Prime Ministers"
-    },
-    {
-      "category": "World geography",
-      "question": "What is the smallest country in the world by area?",
-      "answer": "Vatican City",
-      "explanation": "It covers less than half a square kilometre, entirely within the city of Rome.",
-      "source": "Encyclopaedia Britannica, Vatican City"
-    },
-    {
-      "category": "Food",
-      "question": "Which nut is native to the rainforests of Queensland and northern New South Wales?",
-      "answer": "Macadamia",
-      "explanation": "The botanist Ferdinand von Mueller named the genus in 1857 after his friend John Macadam. Aboriginal people had been eating the nuts for thousands of years.",
-      "source": "Australian National Botanic Gardens"
-    },
-    {
       "category": "Music",
       "question": "Which Italian composer wrote The Four Seasons?",
       "answer": "Antonio Vivaldi",
       "explanation": "The four violin concertos were published in 1725. Vivaldi was a priest, known as the Red Priest for the colour of his hair.",
       "source": "Encyclopaedia Britannica, Antonio Vivaldi"
-    },
-    {
-      "category": "Language",
-      "question": "How many letters are there in the Greek alphabet?",
-      "answer": "24",
-      "explanation": "It runs from alpha to omega. The word alphabet comes from its first two letters, alpha and beta.",
-      "source": "Encyclopaedia Britannica, Greek alphabet"
-    },
-    {
-      "category": "Australian geography",
-      "question": "What is the largest lake in Australia?",
-      "answer": "Kati Thanda-Lake Eyre",
-      "explanation": "The South Australian salt lake fills completely only a few times a century. Its lowest point, about 15 metres below sea level, is the lowest natural point on the Australian mainland.",
-      "source": "Geoscience Australia, Largest Waterbodies"
-    },
-    {
-      "category": "Australian history",
-      "question": "In 1928 Charles Kingsford Smith and his crew made the first flight across the Pacific from the United States to Australia. What was their aircraft called?",
-      "answer": "Southern Cross",
-      "explanation": "The Fokker trimotor flew from Oakland, California, to Brisbane with stops in Hawaii and Fiji. It is on display near Brisbane Airport.",
-      "source": "National Museum of Australia, Defining Moments"
-    },
-    {
-      "category": "Science",
-      "question": "What is the hardest naturally occurring substance?",
-      "answer": "Diamond",
-      "explanation": "Diamond is pure carbon and scores 10 on the Mohs scale of hardness. Graphite, also pure carbon, is one of the softest minerals.",
-      "source": "Geological Society of London"
     },
     {
       "category": "Art",
@@ -207,13 +214,6 @@
       "answer": "Blue heeler (Australian cattle dog)",
       "explanation": "The series is made by Ludo Studio in Brisbane and first aired in 2018. Bluey's sister Bingo is a red heeler.",
       "source": "ABC; Ludo Studio"
-    },
-    {
-      "category": "World geography",
-      "question": "What is the longest river in South America?",
-      "answer": "The Amazon",
-      "explanation": "The Amazon carries more water than any other river on Earth, about a fifth of all the river water that reaches the oceans.",
-      "source": "Encyclopaedia Britannica, Amazon River"
     }
   ]
 }
