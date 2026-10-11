@@ -1,0 +1,129 @@
+{
+  "id": "2026-10-11",
+  "number": 3,
+  "date": "2026-10-11",
+  "title": "Rivers, racehorses and a wall coming down",
+  "sample": true,
+  "questions": [
+    {
+      "category": "Australian history",
+      "question": "In which year did Australia's six colonies federate to form the Commonwealth of Australia?",
+      "options": ["1888", "1901", "1915", "1927"],
+      "answer": 1,
+      "explanation": "The Commonwealth came into being on 1 January 1901, with the ceremony held in Centennial Park, Sydney. Edmund Barton became the first prime minister.",
+      "source": "National Archives of Australia"
+    },
+    {
+      "category": "Australian geography",
+      "question": "Which is the longest river in Australia?",
+      "options": ["Murrumbidgee", "Darling", "Murray", "Lachlan"],
+      "answer": 2,
+      "explanation": "The Murray runs about 2,508 km from the Australian Alps to the sea in South Australia, and forms much of the border between New South Wales and Victoria. The Darling is second at roughly 1,470 km.",
+      "source": "Geoscience Australia, Longest Rivers"
+    },
+    {
+      "category": "Sport",
+      "question": "Which horse won the Melbourne Cup three years in a row, in 2003, 2004 and 2005?",
+      "options": ["Makybe Diva", "Might and Power", "Saintly", "Efficient"],
+      "answer": 0,
+      "explanation": "Makybe Diva is the only horse to win the Cup three times. Phar Lap, for all his fame, won it once, in 1930.",
+      "source": "Victoria Racing Club, Melbourne Cup honour roll"
+    },
+    {
+      "category": "Science",
+      "question": "Which gas makes up most of Earth's atmosphere?",
+      "options": ["Oxygen", "Carbon dioxide", "Argon", "Nitrogen"],
+      "answer": 3,
+      "explanation": "Nitrogen accounts for about 78 per cent of dry air. Oxygen is about 21 per cent, and carbon dioxide is well under a tenth of one per cent.",
+      "source": "NASA Earth Fact Sheet"
+    },
+    {
+      "category": "Film",
+      "question": "Which Australian-made film won the Academy Award for Best Animated Feature in 2007?",
+      "options": ["Mary and Max", "Happy Feet", "Legend of the Guardians", "Babe"],
+      "answer": 1,
+      "explanation": "George Miller's Happy Feet, animated in Sydney, won at the 79th Academy Awards. Miller is better known for the Mad Max films.",
+      "source": "Academy of Motion Picture Arts and Sciences, 79th Awards"
+    },
+    {
+      "category": "World geography",
+      "question": "Lake Baikal, the deepest lake in the world, is in which country?",
+      "options": ["Mongolia", "Kazakhstan", "Russia", "Canada"],
+      "answer": 2,
+      "explanation": "Baikal, in Siberia, reaches a depth of more than 1,600 metres and holds roughly a fifth of the world's unfrozen surface fresh water.",
+      "source": "UNESCO World Heritage List, Lake Baikal"
+    },
+    {
+      "category": "Literature",
+      "question": "Which Australian author won the Nobel Prize in Literature in 1973?",
+      "options": ["Patrick White", "Thomas Keneally", "Peter Carey", "David Malouf"],
+      "answer": 0,
+      "explanation": "Patrick White, author of Voss and The Tree of Man, remains the only Australian to win the literature prize. He used the money to establish an award for under-recognised Australian writers.",
+      "source": "NobelPrize.org, Literature 1973"
+    },
+    {
+      "category": "Music",
+      "question": "Which band released the 1987 album Diesel and Dust, featuring the song Beds Are Burning?",
+      "options": ["INXS", "Cold Chisel", "Hunters & Collectors", "Midnight Oil"],
+      "answer": 3,
+      "explanation": "Midnight Oil wrote the album after touring remote Aboriginal communities in 1986. Beds Are Burning is about returning land to the Pintupi people.",
+      "source": "National Film and Sound Archive of Australia"
+    },
+    {
+      "category": "Nature",
+      "question": "The platypus is a monotreme, a mammal that lays eggs. Which other animal belongs to this group?",
+      "options": ["Bilby", "Echidna", "Quoll", "Numbat"],
+      "answer": 1,
+      "explanation": "The platypus and four species of echidna are the only living monotremes. All are found in Australia or New Guinea.",
+      "source": "Australian Museum"
+    },
+    {
+      "category": "World history",
+      "question": "In which year did the Berlin Wall come down?",
+      "options": ["1985", "1987", "1989", "1991"],
+      "answer": 2,
+      "explanation": "The border was opened on 9 November 1989, after 28 years. Germany was formally reunified in October 1990.",
+      "source": "Berlin Wall Foundation"
+    },
+    {
+      "category": "Sport",
+      "question": "Which of the four tennis Grand Slam tournaments is played on clay?",
+      "options": ["French Open", "Wimbledon", "US Open", "Australian Open"],
+      "answer": 0,
+      "explanation": "The French Open is played on red clay at Roland Garros in Paris. Wimbledon is on grass, and the Australian and US Opens are on hard courts.",
+      "source": "International Tennis Federation"
+    },
+    {
+      "category": "Technology",
+      "question": "Research patented by CSIRO scientists in the 1990s became a core part of which everyday technology?",
+      "options": ["Bluetooth", "GPS", "The touchscreen", "Wi-Fi"],
+      "answer": 3,
+      "explanation": "A CSIRO team led by John O'Sullivan solved the problem of radio signals echoing indoors, work that grew out of radio astronomy. The patent later earned the agency hundreds of millions of dollars.",
+      "source": "CSIRO, Wireless LAN"
+    },
+    {
+      "category": "World geography",
+      "question": "Mount Kilimanjaro, the highest mountain in Africa, is in which country?",
+      "options": ["Kenya", "Tanzania", "Ethiopia", "Uganda"],
+      "answer": 1,
+      "explanation": "Kilimanjaro stands 5,895 metres high in north-eastern Tanzania, close to the Kenyan border. It is a dormant volcano.",
+      "source": "UNESCO World Heritage List, Kilimanjaro National Park"
+    },
+    {
+      "category": "Literature",
+      "question": "Who wrote the novel Nineteen Eighty-Four?",
+      "options": ["Aldous Huxley", "Ray Bradbury", "George Orwell", "H. G. Wells"],
+      "answer": 2,
+      "explanation": "George Orwell, the pen name of Eric Blair, published the novel in 1949. It was his last book; he died the following January.",
+      "source": "The Orwell Foundation"
+    },
+    {
+      "category": "Australian history",
+      "question": "The Eureka Stockade rebellion of 1854 took place on the goldfields of which town?",
+      "options": ["Ballarat", "Bendigo", "Bathurst", "Kalgoorlie"],
+      "answer": 0,
+      "explanation": "Miners at Ballarat, protesting licence fees and a lack of political representation, were attacked by government troops on 3 December 1854. The battle lasted about 15 minutes.",
+      "source": "National Museum of Australia, Defining Moments"
+    }
+  ]
+}

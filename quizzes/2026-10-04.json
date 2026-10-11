@@ -1,0 +1,89 @@
+{
+  "id": "2026-10-04",
+  "number": 2,
+  "date": "2026-10-04",
+  "title": "A temporary capital and a near-perfect average",
+  "sample": true,
+  "questions": [
+    {
+      "category": "Australian history",
+      "question": "Before Parliament moved to Canberra in 1927, in which city did the federal Parliament sit?",
+      "options": ["Sydney", "Adelaide", "Melbourne", "Brisbane"],
+      "answer": 2,
+      "explanation": "Federal Parliament met in Melbourne from 1901, borrowing the Victorian Parliament House. The Victorian Parliament moved to the Royal Exhibition Building in the meantime.",
+      "source": "Parliamentary Education Office"
+    },
+    {
+      "category": "Australian geography",
+      "question": "Which is the largest Australian state or territory by area?",
+      "options": ["Western Australia", "Queensland", "Northern Territory", "South Australia"],
+      "answer": 0,
+      "explanation": "Western Australia covers about 2.5 million square kilometres, close to a third of the country.",
+      "source": "Geoscience Australia, Area of Australia"
+    },
+    {
+      "category": "Sport",
+      "question": "What was Don Bradman's Test batting average when he retired?",
+      "options": ["89.78", "94.99", "101.39", "99.94"],
+      "answer": 3,
+      "explanation": "Bradman needed four runs in his final innings, at The Oval in 1948, to finish with an average of 100. He was bowled for a duck.",
+      "source": "Bradman Museum"
+    },
+    {
+      "category": "Science",
+      "question": "What is the chemical symbol for gold?",
+      "options": ["Gd", "Au", "Ag", "Go"],
+      "answer": 1,
+      "explanation": "Au comes from the Latin aurum. Ag is silver, from argentum.",
+      "source": "Royal Society of Chemistry, Periodic Table"
+    },
+    {
+      "category": "Architecture",
+      "question": "Which architect designed the Sydney Opera House?",
+      "options": ["Harry Seidler", "Jørn Utzon", "Walter Burley Griffin", "Glenn Murcutt"],
+      "answer": 1,
+      "explanation": "The Danish architect won an international competition in 1957. He left the project in 1966 after a dispute with the NSW Government and never saw the finished building in person.",
+      "source": "Sydney Opera House, Our Story"
+    },
+    {
+      "category": "Australian history",
+      "question": "In which year did Australia switch from pounds, shillings and pence to decimal currency?",
+      "options": ["1966", "1956", "1971", "1975"],
+      "answer": 0,
+      "explanation": "The dollar was introduced on 14 February 1966. Names considered for the new currency included the royal, the austral and the emu.",
+      "source": "Reserve Bank of Australia Museum"
+    },
+    {
+      "category": "Music",
+      "question": "Which band released the album Back in Black in 1980?",
+      "options": ["The Angels", "Rose Tattoo", "AC/DC", "Australian Crawl"],
+      "answer": 2,
+      "explanation": "It was AC/DC's first album with singer Brian Johnson, recorded months after the death of Bon Scott. It is one of the best-selling albums ever made.",
+      "source": "National Film and Sound Archive of Australia"
+    },
+    {
+      "category": "Science",
+      "question": "How many bones are there in a typical adult human body?",
+      "options": ["186", "226", "246", "206"],
+      "answer": 3,
+      "explanation": "Babies are born with around 300 bones and pieces of cartilage, many of which fuse as they grow.",
+      "source": "Encyclopaedia Britannica, Human skeleton"
+    },
+    {
+      "category": "World geography",
+      "question": "Canberra is the capital of Australia. What is the capital of Canada?",
+      "options": ["Toronto", "Ottawa", "Montreal", "Vancouver"],
+      "answer": 1,
+      "explanation": "Ottawa was chosen in 1857, partly as a compromise between larger rival cities. Canberra exists for much the same reason.",
+      "source": "Government of Canada"
+    },
+    {
+      "category": "World history",
+      "question": "Who led the first expedition to reach the South Pole, in December 1911?",
+      "options": ["Roald Amundsen", "Robert Falcon Scott", "Ernest Shackleton", "Douglas Mawson"],
+      "answer": 0,
+      "explanation": "The Norwegian's party arrived on 14 December 1911, about five weeks ahead of Scott's. Mawson, the Australian, was leading a separate scientific expedition at the time.",
+      "source": "Fram Museum, Oslo"
+    }
+  ]
+}

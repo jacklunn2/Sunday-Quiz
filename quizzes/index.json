@@ -1,0 +1,31 @@
+{
+  "quizzes": [
+    {
+      "id": "2026-10-11",
+      "number": 3,
+      "date": "2026-10-11",
+      "title": "Rivers, racehorses and a wall coming down",
+      "blurb": "A three-time Melbourne Cup winner, the world's deepest lake and the Australian research inside your router.",
+      "questionCount": 15,
+      "sample": true
+    },
+    {
+      "id": "2026-10-04",
+      "number": 2,
+      "date": "2026-10-04",
+      "title": "A temporary capital and a near-perfect average",
+      "blurb": "Where Parliament sat before Canberra, the most famous number in cricket and a race to the South Pole.",
+      "questionCount": 10,
+      "sample": true
+    },
+    {
+      "id": "2026-09-27",
+      "number": 1,
+      "date": "2026-09-27",
+      "title": "Cube-shaped evidence",
+      "blurb": "One lap in Sydney, a landmark referendum and the marsupial with the strangest calling card.",
+      "questionCount": 10,
+      "sample": true
+    }
+  ]
+}
