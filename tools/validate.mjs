@@ -18,13 +18,10 @@ for (const e of manifest) {
   q.questions.forEach((x, i) => {
     const w = `${e.id}.json question ${i + 1}`;
     if (!x.question?.trim()) errors.push(`${w}: no question text`);
-    if (!Array.isArray(x.options) || x.options.length !== 4) errors.push(`${w}: needs exactly 4 options`);
-    else if (new Set(x.options).size !== x.options.length) errors.push(`${w}: duplicate options`);
-    if (!Number.isInteger(x.answer) || x.answer < 0 || x.answer >= (x.options?.length || 0)) errors.push(`${w}: answer index out of range`);
-    for (const k of ['category', 'explanation', 'source']) if (!x[k]?.trim()) errors.push(`${w}: missing ${k}`);
+    for (const k of ['category', 'answer', 'explanation', 'source']) if (!x[k]?.trim()) errors.push(`${w}: missing ${k}`);
   });
-  const spread = [0, 1, 2, 3].map((k) => q.questions.filter((x) => x.answer === k).length);
-  console.log(`${e.id}  No. ${e.number}  ${q.questions.length} questions  answer spread A-D: ${spread.join('/')}`);
+  if (!e.sample && q.questions.length !== 30) errors.push(`${at}: a published quiz needs 30 questions, this has ${q.questions.length}`);
+  console.log(`${e.id}  No. ${e.number}  ${q.questions.length} questions`);
 }
 if (errors.length) { console.error('\n' + errors.join('\n')); process.exit(1); }
 console.log('All quizzes valid.');

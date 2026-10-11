@@ -1,13 +1,16 @@
 /* The Sunday Quiz — application logic.
    Quiz content lives in /quizzes as JSON. Nothing in this file needs to change
-   to publish a new quiz: add a file and a manifest entry (see README.md). */
+   to publish a new quiz: add a file and a manifest entry (see README.md).
+
+   Format: each question has a written answer. The player reveals it with a
+   button, then marks themselves right or wrong. */
 (() => {
   'use strict';
 
   const SITE_NAME = 'The Sunday Quiz';
   const SITE_URL = '';               // Set once the site has a public address; added to shared results.
   const TIME_ZONE = 'Australia/Sydney';
-  const SECONDS_PER_QUESTION = 25;   // Used only for the "about N minutes" estimate.
+  const SECONDS_PER_QUESTION = 20;   // Used only for the "about N minutes" estimate.
 
   const app = document.getElementById('app');
   const main = document.getElementById('main');
@@ -18,7 +21,6 @@
   /* ---------- helpers ---------- */
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const LETTERS = 'ABCDEFGH';
 
   function todayISO() {
     return new Intl.DateTimeFormat('en-CA', {
@@ -38,32 +40,35 @@
   }
   const minutesFor = (n) => Math.max(1, Math.round((n * SECONDS_PER_QUESTION) / 60));
 
-  /* ---------- saved progress (per browser; falls back to memory) ---------- */
+  /* ---------- saved progress (per browser; falls back to memory) ----------
+     marks[i] is true (got it), false (missed it) or null (not marked yet). */
   const memory = {};
+  const KEY = 'sq2:';
   const store = {
     get(id) {
-      try { const v = JSON.parse(localStorage.getItem('sq:' + id)); if (v) return v; } catch (e) { /* ignore */ }
+      try { const v = JSON.parse(localStorage.getItem(KEY + id)); if (v) return v; } catch (e) { /* ignore */ }
       return memory[id] || null;
     },
     set(id, value) {
       memory[id] = value;
-      try { localStorage.setItem('sq:' + id, JSON.stringify(value)); } catch (e) { /* ignore */ }
+      try { localStorage.setItem(KEY + id, JSON.stringify(value)); } catch (e) { /* ignore */ }
     },
     clear(id) {
       delete memory[id];
-      try { localStorage.removeItem('sq:' + id); } catch (e) { /* ignore */ }
+      try { localStorage.removeItem(KEY + id); } catch (e) { /* ignore */ }
     },
   };
   function stateFor(quiz) {
     const n = quiz.questions.length;
-    const saved = store.get(quiz.id);
-    if (saved && Array.isArray(saved.answers) && saved.answers.length === n) {
-      return { answers: saved.answers, current: Math.min(Math.max(saved.current | 0, 0), n - 1), submitted: !!saved.submitted };
+    const s = store.get(quiz.id);
+    if (s && Array.isArray(s.marks) && s.marks.length === n && Array.isArray(s.revealed) && s.revealed.length === n) {
+      return { marks: s.marks, revealed: s.revealed, submitted: !!s.submitted };
     }
-    return { answers: new Array(n).fill(null), current: 0, submitted: false };
+    return { marks: new Array(n).fill(null), revealed: new Array(n).fill(false), submitted: false };
   }
-  const scoreOf = (quiz, state) => quiz.questions.reduce((t, q, i) => t + (state.answers[i] === q.answer ? 1 : 0), 0);
-  const answeredCount = (state) => state.answers.filter((a) => a !== null).length;
+  const scoreOf = (state) => state.marks.filter((m) => m === true).length;
+  const markedCount = (state) => state.marks.filter((m) => m !== null).length;
+  const started = (state) => state.revealed.some(Boolean);
 
   /* ---------- data ---------- */
   async function getJSON(path) {
@@ -86,9 +91,8 @@
     const list = await loadManifest();
     if (!list.some((q) => q.id === id)) throw new Error('not-found');
     const quiz = await getJSON(`quizzes/${id}.json`);
-    const ok = Array.isArray(quiz.questions) && quiz.questions.length > 0 && quiz.questions.every((q) =>
-      q.question && Array.isArray(q.options) && q.options.length >= 2 &&
-      Number.isInteger(q.answer) && q.answer >= 0 && q.answer < q.options.length);
+    const ok = Array.isArray(quiz.questions) && quiz.questions.length > 0 &&
+      quiz.questions.every((q) => q.question && q.answer);
     if (!ok) throw new Error('This quiz file has a formatting problem.');
     quizCache.set(id, quiz);
     return quiz;
@@ -98,14 +102,9 @@
   const sampleTag = (q) => (q.sample ? '<span class="tag">Sample quiz</span>' : '');
 
   function statusFor(entry) {
-    const saved = store.get(entry.id);
-    if (saved && saved.submitted && quizCache.has(entry.id)) {
-      return { href: `#results-${entry.id}`, label: `You scored ${scoreOf(quizCache.get(entry.id), saved)}/${entry.questionCount}`, cls: '' };
-    }
-    if (saved && saved.submitted) return { href: `#results-${entry.id}`, label: 'Completed', cls: '' };
-    if (saved && answeredCount(saved) > 0) {
-      return { href: `#quiz-${entry.id}`, label: `In progress, ${answeredCount(saved)} of ${entry.questionCount}`, cls: '' };
-    }
+    const s = store.get(entry.id);
+    if (s && s.submitted) return { href: `#results-${entry.id}`, label: `You scored ${scoreOf(s)}/${entry.questionCount}`, cls: '' };
+    if (s && started(s)) return { href: `#quiz-${entry.id}`, label: `In progress, ${markedCount(s)} of ${entry.questionCount}`, cls: '' };
     return { href: `#quiz-${entry.id}`, label: 'Not played', cls: 'is-new' };
   }
   function quizRow(entry) {
@@ -120,11 +119,6 @@
       <span class="row-status ${s.cls}">${esc(s.label)}</span>
     </a></li>`;
   }
-  // Scores in rows need the quiz file; fetch quietly for anything already completed.
-  async function warmCompleted(list) {
-    await Promise.all(list.filter((e) => { const s = store.get(e.id); return s && s.submitted; })
-      .map((e) => loadQuiz(e.id).catch(() => null)));
-  }
 
   /* ---------- views ---------- */
   async function viewHome() {
@@ -133,12 +127,11 @@
       app.innerHTML = `<div class="view"><p class="empty">The first quiz is on its way. It lands on ${esc(formatDate(nextSundayISO()))}.</p></div>`;
       return;
     }
-    await warmCompleted(list);
     const latest = list[0];
     const s = statusFor(latest);
     const saved = store.get(latest.id);
-    const cta = saved && saved.submitted ? `See your result${quizCache.has(latest.id) ? `: ${scoreOf(quizCache.get(latest.id), saved)}/${latest.questionCount}` : ''}`
-      : saved && answeredCount(saved) > 0 ? `Continue, ${answeredCount(saved)} of ${latest.questionCount} answered`
+    const cta = saved && saved.submitted ? `See your result: ${scoreOf(saved)}/${latest.questionCount}`
+      : saved && started(saved) ? `Continue, ${markedCount(saved)} of ${latest.questionCount} marked`
       : 'Start the quiz';
     const earlier = list.slice(1, 4);
     const isToday = latest.date === todayISO();
@@ -155,9 +148,9 @@
       </section>
 
       <section class="premise" aria-label="How it works">
-        <div><h2>One quiz, every Sunday</h2><p>A new set of questions is published each Sunday. The next one is due on ${esc(formatDate(nextSundayISO(), false))}.</p></div>
+        <div><h2>One quiz, every Sunday</h2><p>Thirty new questions are published each Sunday. The next set is due on ${esc(formatDate(nextSundayISO(), false))}.</p></div>
         <div><h2>Written for Australians</h2><p>History, geography, sport, science and culture from here, mixed with general knowledge from everywhere else.</p></div>
-        <div><h2>Answers worth reading</h2><p>Every answer comes with a short explanation and its source, so you finish knowing a little more than when you started.</p></div>
+        <div><h2>Play it your way</h2><p>Answer in your head or out loud with the table, then reveal each answer and keep your own score.</p></div>
       </section>
 
       ${earlier.length ? `<section aria-labelledby="earlier-title">
@@ -169,7 +162,6 @@
 
   async function viewArchive() {
     const list = await loadManifest();
-    await warmCompleted(list);
     app.innerHTML = `<div class="view">
       <section aria-labelledby="archive-title">
         <h1 class="page-title" id="archive-title">Archive</h1>
@@ -179,89 +171,90 @@
     </div>`;
   }
 
+  function answerBlock(q, i, state) {
+    const m = state.marks[i];
+    return `<div class="answer" id="a-${i}" tabindex="-1">
+      <p class="answer-text"><span class="sr">Answer: </span>${esc(q.answer)}</p>
+      ${q.explanation ? `<p>${esc(q.explanation)}</p>` : ''}
+      ${q.source ? `<p class="source">Source: ${esc(q.source)}</p>` : ''}
+      <div class="marks" role="group" aria-label="Mark question ${i + 1}">
+        <button type="button" class="mark-btn" data-action="mark" data-i="${i}" data-v="1" aria-pressed="${m === true}">✓ Got it</button>
+        <button type="button" class="mark-btn" data-action="mark" data-i="${i}" data-v="0" aria-pressed="${m === false}">✗ Missed it</button>
+      </div>
+    </div>`;
+  }
+
   async function viewQuiz(id) {
     const quiz = await loadQuiz(id);
     const state = stateFor(quiz);
     if (state.submitted) { location.replace(`#results-${id}`); return; }
-    ctx = { quiz, state, confirming: false };
+    ctx = { quiz, state };
     const n = quiz.questions.length;
     app.innerHTML = `<div class="narrow">
       <header class="quiz-head">
         <p class="eyebrow">No. ${esc(quiz.number)} · ${esc(formatDate(quiz.date))} ${sampleTag(quiz)}</p>
         <h1>${esc(quiz.title)}</h1>
+        <p>${n} questions. Decide on your answer, reveal it, then mark yourself.</p>
       </header>
-      <nav class="progress" aria-label="Questions">
-        <ol>${quiz.questions.map((_, i) => `<li><button type="button" class="seg" data-action="goto" data-i="${i}"></button></li>`).join('')}</ol>
-        <p class="progress-text"><span id="progress-pos"></span><span id="progress-done"></span></p>
-      </nav>
-      <div id="question"></div>
-    </div>`;
-    renderQuestion(false);
-    void n;
-  }
-
-  function updateProgress() {
-    const { quiz, state } = ctx;
-    const n = quiz.questions.length;
-    app.querySelectorAll('.seg').forEach((seg, i) => {
-      const done = state.answers[i] !== null;
-      seg.classList.toggle('is-answered', done);
-      if (i === state.current) seg.setAttribute('aria-current', 'step'); else seg.removeAttribute('aria-current');
-      seg.setAttribute('aria-label', `Question ${i + 1}, ${done ? 'answered' : 'not answered'}`);
-    });
-    document.getElementById('progress-pos').textContent = `Question ${state.current + 1} of ${n}`;
-    document.getElementById('progress-done').textContent = `${answeredCount(state)} answered`;
-  }
-
-  function renderQuestion(moveFocus = true) {
-    const { quiz, state } = ctx;
-    const n = quiz.questions.length;
-    const i = state.current;
-    const q = quiz.questions[i];
-    const last = i === n - 1;
-    const missing = state.answers.map((a, k) => (a === null ? k : -1)).filter((k) => k >= 0);
-    const confirm = ctx.confirming && missing.length
-      ? `<div class="notice" role="alert">
-          <p>${missing.length === 1 ? `Question ${missing[0] + 1} has no answer yet.` : `${missing.length} questions have no answer yet: ${missing.map((k) => k + 1).join(', ')}.`} Unanswered questions are marked wrong.</p>
-          <div class="actions">
-            <button type="button" class="btn" data-action="goto" data-i="${missing[0]}">Go to question ${missing[0] + 1}</button>
-            <button type="button" class="btn btn-quiet" data-action="submit">Finish anyway</button>
+      <ol class="items">
+        ${quiz.questions.map((q, i) => `<li class="item" id="q-${i}">
+          <span class="item-num" aria-hidden="true">${i + 1}</span>
+          <div class="item-body">
+            ${q.category ? `<p class="eyebrow q-cat">${esc(q.category)}</p>` : ''}
+            <h2 class="item-q"><span class="sr">Question ${i + 1}. </span>${esc(q.question)}</h2>
+            ${state.revealed[i] ? answerBlock(q, i, state)
+              : `<button type="button" class="btn btn-quiet btn-small" data-action="reveal" data-i="${i}">Show answer<span class="sr"> to question ${i + 1}</span></button>`}
           </div>
-        </div>` : '';
-    document.getElementById('question').innerHTML = `<div class="q">
-      <div class="q-top">
-        <p class="q-num" aria-hidden="true">${i + 1}<small>/${n}</small></p>
-        ${q.category ? `<p class="eyebrow q-cat">${esc(q.category)}</p>` : ''}
+        </li>`).join('')}
+      </ol>
+      <div id="finish-notice"></div>
+      <div class="tally">
+        <p aria-live="polite"><strong id="tally-score"></strong><span id="tally-marked"></span></p>
+        <button type="button" class="btn btn-small" data-action="finish">Finish quiz</button>
       </div>
-      <h2 class="q-text" id="q-text" tabindex="-1"><span class="skip" style="position:absolute;left:-999px">Question ${i + 1} of ${n}. </span>${esc(q.question)}</h2>
-      <div class="options" role="radiogroup" aria-labelledby="q-text">
-        ${q.options.map((opt, k) => `<label class="option" for="opt-${k}">
-          <input type="radio" name="answer" id="opt-${k}" value="${k}" ${state.answers[i] === k ? 'checked' : ''}>
-          <span class="option-key" aria-hidden="true">${LETTERS[k]}</span>
-          <span class="option-text">${esc(opt)}</span>
-        </label>`).join('')}
-      </div>
-      ${confirm}
-      <div class="q-nav">
-        ${i > 0 ? '<button type="button" class="btn btn-quiet" data-action="prev">Back</button>' : ''}
-        ${last ? '<button type="button" class="btn" data-action="finish">Finish and see results</button>'
-               : '<button type="button" class="btn" data-action="next">Next question</button>'}
-      </div>
-      <p class="hint">You can change any answer before you finish. Answers are revealed at the end.</p>
     </div>`;
-    updateProgress();
-    if (moveFocus) {
-      document.getElementById('q-text').focus({ preventScroll: true });
-      main.scrollIntoView({ block: 'start' });
-    }
+    updateTally();
   }
 
-  function goTo(i) {
+  function updateTally() {
     const { quiz, state } = ctx;
-    state.current = Math.min(Math.max(i, 0), quiz.questions.length - 1);
-    ctx.confirming = false;
+    const n = quiz.questions.length;
+    document.getElementById('tally-score').textContent = `${scoreOf(state)} correct`;
+    document.getElementById('tally-marked').textContent = `${markedCount(state)} of ${n} marked`;
+  }
+
+  function reveal(i, button) {
+    const { quiz, state } = ctx;
+    state.revealed[i] = true;
     store.set(quiz.id, state);
-    renderQuestion();
+    button.insertAdjacentHTML('afterend', answerBlock(quiz.questions[i], i, state));
+    button.remove();
+    document.getElementById(`a-${i}`).focus({ preventScroll: true });
+  }
+  function mark(i, value) {
+    const { quiz, state } = ctx;
+    state.marks[i] = state.marks[i] === value ? null : value;   // Pressing the same button again clears the mark.
+    store.set(quiz.id, state);
+    document.querySelectorAll(`#a-${i} .mark-btn`).forEach((b) => {
+      b.setAttribute('aria-pressed', String(state.marks[i] === (b.dataset.v === '1')));
+    });
+    document.getElementById('finish-notice').innerHTML = '';
+    updateTally();
+  }
+  function finish() {
+    const { quiz, state } = ctx;
+    const missing = state.marks.map((m, k) => (m === null ? k : -1)).filter((k) => k >= 0);
+    if (!missing.length) { submit(); return; }
+    const box = document.getElementById('finish-notice');
+    box.innerHTML = `<div class="notice" role="alert">
+      <p>${missing.length === 1 ? `Question ${missing[0] + 1} is not marked yet.` : `${missing.length} questions are not marked yet.`} Unmarked questions count as missed.</p>
+      <div class="actions">
+        <button type="button" class="btn" data-action="jump" data-i="${missing[0]}">Go to question ${missing[0] + 1}</button>
+        <button type="button" class="btn btn-quiet" data-action="submit">Finish anyway</button>
+      </div>
+    </div>`;
+    box.querySelector('.btn').focus();
+    void quiz;
   }
   function submit() {
     const { quiz, state } = ctx;
@@ -275,13 +268,15 @@
     if (pct >= 80) return 'Excellent. You would be carrying the table at trivia night.';
     if (pct >= 60) return 'A solid round, with a few that got away.';
     if (pct >= 40) return 'Respectable. There is room to move next Sunday.';
-    return 'A tough week. The explanations below are worth a read.';
+    return 'A tough week. The answers below are worth a read.';
   }
   function shareText(quiz, state) {
     const n = quiz.questions.length;
-    const score = scoreOf(quiz, state);
-    const grid = quiz.questions.map((q, i) => (state.answers[i] === q.answer ? '■' : '□')).join('');
-    return [`${SITE_NAME} No. ${quiz.number}`, `${score}/${n} (${Math.round((score / n) * 100)}%)`, grid, SITE_URL].filter(Boolean).join('\n');
+    const score = scoreOf(state);
+    const cells = state.marks.map((m) => (m === true ? '■' : '□'));
+    const rows = [];
+    for (let i = 0; i < cells.length; i += 10) rows.push(cells.slice(i, i + 10).join(''));
+    return [`${SITE_NAME} No. ${quiz.number}`, `${score}/${n} (${Math.round((score / n) * 100)}%)`, ...rows, SITE_URL].filter(Boolean).join('\n');
   }
 
   async function viewResults(id) {
@@ -290,7 +285,7 @@
     if (!state.submitted) { location.replace(`#quiz-${id}`); return; }
     ctx = { quiz, state };
     const n = quiz.questions.length;
-    const score = scoreOf(quiz, state);
+    const score = scoreOf(state);
     const pct = Math.round((score / n) * 100);
     const list = await loadManifest();
     const other = list.find((e) => e.id !== id && !(store.get(e.id) || {}).submitted);
@@ -310,19 +305,16 @@
         <div class="section-head"><h2 id="review-title">The answers</h2></div>
         <ol class="review">
           ${quiz.questions.map((q, i) => {
-            const a = state.answers[i];
-            const right = a === q.answer;
+            const m = state.marks[i];
+            const badge = m === true ? '<span class="mark good">✓ Got it</span>'
+              : m === false ? '<span class="mark bad">✗ Missed it</span>'
+              : '<span class="mark bad">Not marked</span>';
             return `<li>
               <span class="review-num" aria-hidden="true">${i + 1}</span>
               <div class="review-body">
                 ${q.category ? `<p class="eyebrow q-cat">${esc(q.category)}</p>` : ''}
-                <h3><span class="skip" style="position:absolute;left:-999px">Question ${i + 1}. </span>${esc(q.question)}</h3>
-                <div class="verdict">
-                  ${right
-                    ? `<p><span class="mark good">✓ Correct</span> ${esc(q.options[a])}</p>`
-                    : `<p><span class="mark bad">✗ ${a === null ? 'Not answered' : 'Your answer'}</span> ${a === null ? '' : esc(q.options[a])}</p>
-                       <p><span class="mark good">Correct answer</span> ${esc(q.options[q.answer])}</p>`}
-                </div>
+                <h3><span class="sr">Question ${i + 1}. </span>${esc(q.question)}</h3>
+                <p class="verdict"><span class="answer-text">${esc(q.answer)}</span><span>${badge}</span></p>
                 ${q.explanation ? `<p>${esc(q.explanation)}</p>` : ''}
                 ${q.source ? `<p class="source">Source: ${esc(q.source)}</p>` : ''}
               </div>
@@ -356,7 +348,7 @@
       let box = document.getElementById('share-out');
       if (!box) {
         box = document.createElement('textarea');
-        box.id = 'share-out'; box.className = 'share-out'; box.readOnly = true; box.rows = 3;
+        box.id = 'share-out'; box.className = 'share-out'; box.readOnly = true; box.rows = 5;
         box.setAttribute('aria-label', 'Your result as text');
         msg.after(box);
       }
@@ -404,38 +396,18 @@
     const action = el.dataset.action;
     if (action === 'reload') { manifest = null; route(); return; }
     if (!ctx) return;
-    if (action === 'goto') goTo(Number(el.dataset.i));
-    else if (action === 'prev') goTo(ctx.state.current - 1);
-    else if (action === 'next') goTo(ctx.state.current + 1);
-    else if (action === 'finish') {
-      if (answeredCount(ctx.state) < ctx.quiz.questions.length) {
-        ctx.confirming = true; renderQuestion(false);
-        app.querySelector('.notice .btn').focus();
-      } else submit();
+    const i = Number(el.dataset.i);
+    if (action === 'reveal') reveal(i, el);
+    else if (action === 'mark') mark(i, el.dataset.v === '1');
+    else if (action === 'finish') finish();
+    else if (action === 'jump') {
+      const item = document.getElementById(`q-${i}`);
+      item.scrollIntoView({ block: 'start' });
+      (item.querySelector('[data-action]') || item).focus({ preventScroll: true });
     }
     else if (action === 'submit') submit();
     else if (action === 'share') share();
     else if (action === 'retake') { store.clear(ctx.quiz.id); location.hash = `#quiz-${ctx.quiz.id}`; }
-  });
-
-  app.addEventListener('change', (e) => {
-    if (!ctx || e.target.name !== 'answer') return;
-    ctx.state.answers[ctx.state.current] = Number(e.target.value);
-    store.set(ctx.quiz.id, ctx.state);
-    if (ctx.confirming) { ctx.confirming = false; renderQuestion(false); document.getElementById(e.target.id).focus(); }
-    else updateProgress();
-  });
-
-  // Keyboard shortcut: 1-4 or A-D picks an answer.
-  document.addEventListener('keydown', (e) => {
-    if (!ctx || ctx.state.submitted || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (/^(textarea|select)$/i.test(e.target.tagName)) return;
-    const key = e.key.toLowerCase();
-    let k = '1234'.indexOf(key);
-    if (k < 0) k = 'abcd'.indexOf(key);
-    if (k < 0 || key.length !== 1) return;
-    const input = document.getElementById(`opt-${k}`);
-    if (input) { input.checked = true; input.focus(); input.dispatchEvent(new Event('change', { bubbles: true })); }
   });
 
   window.addEventListener('hashchange', route);

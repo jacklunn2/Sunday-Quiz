@@ -8,80 +8,70 @@
     {
       "category": "Australian geography",
       "question": "What is the highest mountain on the Australian mainland?",
-      "options": ["Mount Bogong", "Mount Townsend", "Mount Kosciuszko", "Mount Feathertop"],
-      "answer": 2,
+      "answer": "Mount Kosciuszko",
       "explanation": "Kosciuszko, in the Snowy Mountains of New South Wales, is 2,228 metres high. Mount Townsend, its neighbour, is second.",
       "source": "Geoscience Australia, Highest Mountains"
     },
     {
       "category": "Sport",
       "question": "In which event did Cathy Freeman win gold at the Sydney 2000 Olympics?",
-      "options": ["400 metres", "200 metres", "800 metres", "400 metres hurdles"],
-      "answer": 0,
+      "answer": "400 metres",
       "explanation": "Freeman, who had lit the cauldron ten days earlier, won in 49.11 seconds in front of more than 110,000 people.",
       "source": "Australian Olympic Committee"
     },
     {
       "category": "Australian history",
       "question": "In which year did Australians vote in a referendum to count Aboriginal people in the census and allow the Commonwealth to make laws for them?",
-      "options": ["1948", "1962", "1975", "1967"],
-      "answer": 3,
+      "answer": "1967",
       "explanation": "More than 90 per cent of voters said yes on 27 May 1967, the highest yes vote in any Australian referendum.",
       "source": "National Museum of Australia, Defining Moments"
     },
     {
       "category": "Science",
       "question": "Which is the largest planet in the solar system?",
-      "options": ["Saturn", "Jupiter", "Neptune", "Uranus"],
-      "answer": 1,
+      "answer": "Jupiter",
       "explanation": "Jupiter has more than twice the mass of all the other planets combined.",
       "source": "NASA Science, Jupiter"
     },
     {
       "category": "Literature",
       "question": "Who wrote the 1991 novel Cloudstreet?",
-      "options": ["Tim Winton", "Helen Garner", "Richard Flanagan", "Kate Grenville"],
-      "answer": 0,
+      "answer": "Tim Winton",
       "explanation": "Cloudstreet follows two families sharing a large house in Perth over twenty years. It won the Miles Franklin Award in 1992.",
       "source": "Miles Franklin Literary Award"
     },
     {
       "category": "World geography",
       "question": "Which country has the largest population in the world?",
-      "options": ["China", "United States", "India", "Indonesia"],
-      "answer": 2,
+      "answer": "India",
       "explanation": "The United Nations estimates that India passed China in 2023. Each has more than 1.4 billion people.",
       "source": "United Nations, World Population Prospects"
     },
     {
       "category": "Australian geography",
       "question": "The Great Barrier Reef lies off the coast of which state?",
-      "options": ["Western Australia", "New South Wales", "Northern Territory", "Queensland"],
-      "answer": 3,
+      "answer": "Queensland",
       "explanation": "The reef stretches about 2,300 kilometres along the Queensland coast. Western Australia has a major reef of its own, Ningaloo.",
       "source": "Great Barrier Reef Marine Park Authority"
     },
     {
       "category": "Art",
       "question": "Who painted the Mona Lisa?",
-      "options": ["Michelangelo", "Leonardo da Vinci", "Raphael", "Botticelli"],
-      "answer": 1,
+      "answer": "Leonardo da Vinci",
       "explanation": "Leonardo began the portrait in Florence around 1503. It hangs in the Louvre, where it was stolen in 1911 and missing for more than two years.",
       "source": "Musée du Louvre"
     },
     {
       "category": "Nature",
       "question": "Which Australian marsupial produces cube-shaped droppings?",
-      "options": ["Wombat", "Koala", "Tasmanian devil", "Quokka"],
-      "answer": 0,
+      "answer": "Wombat",
       "explanation": "The shape forms in the last section of the wombat's intestine, where the walls vary in stiffness. Researchers who worked this out won an Ig Nobel Prize in 2019.",
       "source": "University of Tasmania"
     },
     {
       "category": "World history",
       "question": "In which year did humans first walk on the Moon?",
-      "options": ["1965", "1967", "1969", "1972"],
-      "answer": 2,
+      "answer": "1969",
       "explanation": "Apollo 11 landed in July 1969. Television pictures of the moonwalk reached the world through tracking stations at Honeysuckle Creek near Canberra and Parkes in New South Wales.",
       "source": "NASA; CSIRO Parkes Observatory"
     }
