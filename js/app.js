@@ -110,15 +110,20 @@
   function quizRow(entry) {
     const s = statusFor(entry);
     return `<li><a class="row" href="${s.href}">
-      <span class="row-num"><small>No.</small>${esc(entry.number)}</span>
+      <span class="row-num shout blk c${(Number(entry.number) || 0) % 3}" aria-hidden="true">${esc(entry.number)}</span>
       <span class="row-main">
-        <span class="row-date"><span>${esc(formatDate(entry.date))}</span><span>${esc(entry.questionCount)} questions</span>${sampleTag(entry)}</span>
-        <h3>${esc(entry.title)}</h3>
+        <span class="row-date"><span>No. ${esc(entry.number)}</span><span>${esc(formatDate(entry.date))}</span><span>${esc(entry.questionCount)} questions</span>${sampleTag(entry)}</span>
+        <h3 class="shout">${esc(entry.title)}</h3>
         ${entry.blurb ? `<p>${esc(entry.blurb)}</p>` : ''}
       </span>
       <span class="row-status ${s.cls}">${esc(s.label)}</span>
     </a></li>`;
   }
+
+  // Rounds: a quiz of 20 or more questions, in tens, is split into rounds of ten.
+  const ROUND = 10;
+  const roundsOf = (n) => (n >= 20 && n % ROUND === 0 ? n / ROUND : 1);
+  const colourOf = (i, n) => `c${roundsOf(n) > 1 ? Math.floor(i / ROUND) % 3 : 0}`;
 
   /* ---------- views ---------- */
   async function viewHome() {
@@ -135,26 +140,50 @@
       : 'Start the quiz';
     const earlier = list.slice(1, 4);
     const isToday = latest.date === todayISO();
+    const quiz = await loadQuiz(latest.id).catch(() => null);
+    const qs = quiz ? quiz.questions : [];
+    const picks = (qs.length > 20 ? [0, 10, 20] : [0, 1, 2]).filter((i) => i < qs.length);
+    const cats = [...new Set(qs.map((q) => q.category).filter(Boolean))];
+    const run = cats.map((c) => `${esc(c)}<i>✺</i>`).join('');
     app.innerHTML = `<div class="view">
-      <section class="lead on-accent" aria-labelledby="lead-title">
+      <section class="lead blk c0" aria-labelledby="lead-title">
+        <p class="stamp" aria-hidden="true">${isToday ? 'Out<br>today' : 'This<br>week'}</p>
         <div class="lead-body">
           <p class="eyebrow">${isToday ? 'Out today' : 'This week'} · ${esc(formatDate(latest.date))}</p>
-          <h1 id="lead-title">${esc(latest.title)}</h1>
+          <h1 class="shout" id="lead-title">${esc(latest.title)}</h1>
           ${latest.blurb ? `<p class="lead-blurb">${esc(latest.blurb)}</p>` : ''}
           <a class="btn" href="${s.href}">${esc(cta)}</a>
           <p class="meta"><span>${esc(latest.questionCount)} questions</span><span>About ${minutesFor(latest.questionCount)} minutes</span><span>Free, no sign-up</span>${sampleTag(latest)}</p>
         </div>
-        <p class="issue" aria-label="Quiz number ${esc(latest.number)}"><small aria-hidden="true">No.</small><span aria-hidden="true">${esc(latest.number)}</span></p>
+        <p class="issue shout" aria-label="Quiz number ${esc(latest.number)}"><small aria-hidden="true">No.</small><span aria-hidden="true">${esc(latest.number)}</span></p>
       </section>
 
-      <section class="premise" aria-label="How it works">
-        <div><h2>One quiz, every Sunday</h2><p>Thirty new questions are published each Sunday. The next set is due on ${esc(formatDate(nextSundayISO(), false))}.</p></div>
-        <div><h2>Written for Australians</h2><p>History, geography, sport, science and culture from here, mixed with general knowledge from everywhere else.</p></div>
-        <div><h2>Play it your way</h2><p>Answer in your head or out loud with the table, then reveal each answer and keep your own score.</p></div>
+      ${cats.length ? `<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>${run}</span><span>${run}</span></div></div>
+      <p class="sr">This week's subjects: ${esc(cats.join(', '))}.</p>` : ''}
+
+      ${picks.length ? `<section aria-labelledby="taste-title">
+        <div class="section-head"><h2 class="shout" id="taste-title">Three to get you started</h2><a href="${s.href}">Play all ${esc(latest.questionCount)}</a></div>
+        <div class="teasers">
+          ${picks.map((i, k) => `<a class="teaser blk c${k}" href="${s.href}">
+            <span class="teaser-num shout" aria-hidden="true">${i + 1}<small>?</small></span>
+            ${qs[i].category ? `<span class="eyebrow">${esc(qs[i].category)}</span>` : ''}
+            <span class="teaser-q"><span class="sr">Question ${i + 1}. </span>${esc(qs[i].question)}</span>
+          </a>`).join('')}
+        </div>
+      </section>` : ''}
+
+      <section class="steps slab" aria-labelledby="steps-title">
+        <h2 class="shout" id="steps-title">How it works</h2>
+        <ol>
+          <li><span class="step-num shout" aria-hidden="true">1</span><h3>Have a think</h3><p>Read the question and settle on an answer, on your own or out loud with the table.</p></li>
+          <li><span class="step-num shout" aria-hidden="true">2</span><h3>Show the answer</h3><p>Tap the button. Every answer comes with a short explanation, so you learn something either way.</p></li>
+          <li><span class="step-num shout" aria-hidden="true">3</span><h3>Mark yourself</h3><p>Got it or missed it. Your score adds up as you go, so be honest.</p></li>
+        </ol>
+        <p>A new quiz lands every Sunday. The next one is due on ${esc(formatDate(nextSundayISO(), false))}.</p>
       </section>
 
       ${earlier.length ? `<section aria-labelledby="earlier-title">
-        <div class="section-head"><h2 id="earlier-title">Earlier quizzes</h2><a href="#archive">See the full archive</a></div>
+        <div class="section-head"><h2 class="shout" id="earlier-title">Earlier quizzes</h2><a href="#archive">See the full archive</a></div>
         <ol class="rows">${earlier.map(quizRow).join('')}</ol>
       </section>` : ''}
     </div>`;
@@ -164,7 +193,7 @@
     const list = await loadManifest();
     app.innerHTML = `<div class="view">
       <section aria-labelledby="archive-title">
-        <h1 class="page-title" id="archive-title">Archive</h1>
+        <h1 class="page-title shout" id="archive-title">Archive</h1>
         <p class="page-intro">Every quiz published so far, newest first. Your scores are kept in this browser only.</p>
       </section>
       ${list.length ? `<ol class="rows">${list.map(quizRow).join('')}</ol>` : '<p class="empty">Nothing has been published yet.</p>'}
@@ -176,7 +205,6 @@
     return `<div class="answer" id="a-${i}" tabindex="-1">
       <p class="answer-text"><span class="sr">Answer: </span>${esc(q.answer)}</p>
       ${q.explanation ? `<p>${esc(q.explanation)}</p>` : ''}
-      ${q.source ? `<p class="source">Source: ${esc(q.source)}</p>` : ''}
       <div class="marks" role="group" aria-label="Mark question ${i + 1}">
         <button type="button" class="mark-btn" data-action="mark" data-i="${i}" data-v="1" aria-pressed="${m === true}">✓ Got it</button>
         <button type="button" class="mark-btn" data-action="mark" data-i="${i}" data-v="0" aria-pressed="${m === false}">✗ Missed it</button>
@@ -190,25 +218,34 @@
     if (state.submitted) { location.replace(`#results-${id}`); return; }
     ctx = { quiz, state };
     const n = quiz.questions.length;
+    const rounds = roundsOf(n);
+    const item = (q, i) => `<li class="item" id="q-${i}">
+      <span class="item-num shout" aria-hidden="true">${i + 1}</span>
+      <div class="item-body">
+        ${q.category ? `<p class="eyebrow q-cat">${esc(q.category)}</p>` : ''}
+        <h3 class="item-q"><span class="sr">Question ${i + 1}. </span>${esc(q.question)}</h3>
+        ${state.revealed[i] ? answerBlock(q, i, state)
+          : `<button type="button" class="btn btn-quiet btn-small" data-action="reveal" data-i="${i}">Show answer<span class="sr"> to question ${i + 1}</span></button>`}
+      </div>
+    </li>`;
+    let body = '';
+    for (let r = 0; r < rounds; r++) {
+      const from = rounds > 1 ? r * ROUND : 0;
+      const to = rounds > 1 ? from + ROUND : n;
+      body += `<section class="round c${r % 3} ${rounds > 1 ? 'has-head' : ''}" ${rounds > 1 ? `aria-labelledby="round-${r}"` : 'aria-label="Questions"'}>
+        ${rounds > 1 ? `<header class="round-head blk"><h2 class="shout" id="round-${r}">Round ${r + 1}</h2><p>Questions ${from + 1} to ${to}</p></header>` : ''}
+        <ol class="items" start="${from + 1}">${quiz.questions.slice(from, to).map((q, k) => item(q, from + k)).join('')}</ol>
+      </section>`;
+    }
     app.innerHTML = `<div class="narrow">
       <header class="quiz-head">
         <p class="eyebrow">No. ${esc(quiz.number)} · ${esc(formatDate(quiz.date))} ${sampleTag(quiz)}</p>
-        <h1>${esc(quiz.title)}</h1>
-        <p>${n} questions. Decide on your answer, reveal it, then mark yourself.</p>
+        <h1 class="shout">${esc(quiz.title)}</h1>
+        <p>${n} questions${rounds > 1 ? ` in ${rounds} rounds` : ''}. Decide on your answer, reveal it, then mark yourself.</p>
       </header>
-      <ol class="items">
-        ${quiz.questions.map((q, i) => `<li class="item" id="q-${i}">
-          <span class="item-num" aria-hidden="true">${i + 1}</span>
-          <div class="item-body">
-            ${q.category ? `<p class="eyebrow q-cat">${esc(q.category)}</p>` : ''}
-            <h2 class="item-q"><span class="sr">Question ${i + 1}. </span>${esc(q.question)}</h2>
-            ${state.revealed[i] ? answerBlock(q, i, state)
-              : `<button type="button" class="btn btn-quiet btn-small" data-action="reveal" data-i="${i}">Show answer<span class="sr"> to question ${i + 1}</span></button>`}
-          </div>
-        </li>`).join('')}
-      </ol>
+      ${body}
       <div id="finish-notice"></div>
-      <div class="tally">
+      <div class="tally slab">
         <p aria-live="polite"><strong id="tally-score"></strong><span id="tally-marked"></span></p>
         <button type="button" class="btn btn-small" data-action="finish">Finish quiz</button>
       </div>
@@ -279,20 +316,31 @@
     return [`${SITE_NAME} No. ${quiz.number}`, `${score}/${n} (${Math.round((score / n) * 100)}%)`, ...rows, SITE_URL].filter(Boolean).join('\n');
   }
 
+  function gradeFor(pct) {
+    if (pct === 100) return 'Flaw&shy;less';
+    if (pct >= 80) return 'Sharp';
+    if (pct >= 60) return 'Solid';
+    if (pct >= 40) return 'Fair<br>go';
+    return 'Tough<br>week';
+  }
+
   async function viewResults(id) {
     const quiz = await loadQuiz(id);
     const state = stateFor(quiz);
     if (!state.submitted) { location.replace(`#quiz-${id}`); return; }
     ctx = { quiz, state };
     const n = quiz.questions.length;
+    const rounds = roundsOf(n);
     const score = scoreOf(state);
     const pct = Math.round((score / n) * 100);
     const list = await loadManifest();
     const other = list.find((e) => e.id !== id && !(store.get(e.id) || {}).submitted);
+    const roundScore = (r) => state.marks.slice(r * ROUND, (r + 1) * ROUND).filter((m) => m === true).length;
     app.innerHTML = `<div class="narrow">
-      <section class="score on-accent" aria-labelledby="score-title">
+      <section class="score blk c0" aria-labelledby="score-title">
+        <p class="stamp" aria-hidden="true">${gradeFor(pct)}</p>
         <p class="eyebrow">Your result · No. ${esc(quiz.number)} · ${esc(formatDate(quiz.date))}</p>
-        <p class="score-figure" aria-hidden="true">${score}<small>/${n}</small></p>
+        <p class="score-figure shout" aria-hidden="true">${score}<small>/${n}</small></p>
         <h1 id="score-title" tabindex="-1">You scored ${score} out of ${n}, or ${pct} per cent. ${esc(verdictFor(pct))}</h1>
         <div class="actions">
           <button type="button" class="btn" data-action="share" id="share-btn">Share your score</button>
@@ -301,34 +349,37 @@
         <p class="meta" id="share-msg" role="status"></p>
       </section>
 
+      ${rounds > 1 ? `<ol class="round-scores" aria-label="Score by round">
+        ${Array.from({ length: rounds }, (_, r) => `<li class="blk c${r % 3}"><span class="eyebrow">Round ${r + 1}</span><b class="shout">${roundScore(r)}/${ROUND}</b></li>`).join('')}
+      </ol>` : ''}
+
       <section aria-labelledby="review-title">
-        <div class="section-head"><h2 id="review-title">The answers</h2></div>
+        <div class="section-head"><h2 class="shout" id="review-title">The answers</h2></div>
         <ol class="review">
           ${quiz.questions.map((q, i) => {
             const m = state.marks[i];
             const badge = m === true ? '<span class="mark good">✓ Got it</span>'
               : m === false ? '<span class="mark bad">✗ Missed it</span>'
               : '<span class="mark bad">Not marked</span>';
-            return `<li>
-              <span class="review-num" aria-hidden="true">${i + 1}</span>
+            return `<li class="${colourOf(i, n)}">
+              <span class="review-num shout" aria-hidden="true">${i + 1}</span>
               <div class="review-body">
                 ${q.category ? `<p class="eyebrow q-cat">${esc(q.category)}</p>` : ''}
                 <h3><span class="sr">Question ${i + 1}. </span>${esc(q.question)}</h3>
                 <p class="verdict"><span class="answer-text">${esc(q.answer)}</span><span>${badge}</span></p>
                 ${q.explanation ? `<p>${esc(q.explanation)}</p>` : ''}
-                ${q.source ? `<p class="source">Source: ${esc(q.source)}</p>` : ''}
               </div>
             </li>`;
           }).join('')}
         </ol>
       </section>
 
-      <section class="next" aria-labelledby="next-title">
-        <h2 id="next-title">Back next Sunday</h2>
+      <section class="next slab" aria-labelledby="next-title">
+        <h2 class="shout" id="next-title">Back next Sunday</h2>
         <p>The next quiz is published on ${esc(formatDate(nextSundayISO()))}.</p>
         <div class="actions">
           ${other ? `<a class="btn" href="#quiz-${esc(other.id)}">Play No. ${esc(other.number)} while you wait</a>` : ''}
-          <a class="btn btn-quiet" href="#archive">Browse the archive</a>
+          <a class="btn" href="#archive">Browse the archive</a>
         </div>
       </section>
     </div>`;
@@ -359,7 +410,7 @@
   function viewError(err) {
     const notFound = err && err.message === 'not-found';
     app.innerHTML = `<div class="view"><section>
-      <h1 class="page-title">${notFound ? 'That quiz does not exist' : 'The quiz could not be loaded'}</h1>
+      <h1 class="page-title shout">${notFound ? 'That quiz does not exist' : 'The quiz could not be loaded'}</h1>
       <p class="page-intro">${notFound ? 'It may not have been published yet.' : 'Check your connection and try again.'}</p>
       <p class="actions" style="margin-top:1.25rem">
         ${notFound ? '' : '<button type="button" class="btn" data-action="reload">Try again</button>'}

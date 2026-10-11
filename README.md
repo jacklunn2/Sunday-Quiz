@@ -11,7 +11,7 @@ Then open http://localhost:8000. (Opening index.html directly will not work, bec
 ## Publish a new quiz
 
 1. Copy the newest file in `quizzes/` and name it for the Sunday it goes out, e.g. `quizzes/2026-10-18.json`.
-2. Edit the 30 questions. Each has a `category`, `question`, `answer`, `explanation` and `source`. Players reveal the answer with a button and mark themselves.
+2. Edit the 30 questions. Each has a `category`, `question`, `answer`, `explanation` and `source`. Players reveal the answer with a button and mark themselves. The `source` is for your own fact-checking and is not shown to players.
 3. Add an entry to the top of `quizzes/index.json` with the same `id`, `number`, `date` and `title`, plus a `blurb` and `questionCount`.
 4. Run `node tools/validate.mjs` to catch mistakes.
 5. Upload. A quiz dated in the future stays hidden until that date (Sydney time), so it can be uploaded ahead of Sunday.
