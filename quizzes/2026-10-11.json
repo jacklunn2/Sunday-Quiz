@@ -2,218 +2,218 @@
   "id": "2026-10-11",
   "number": 3,
   "date": "2026-10-11",
-  "title": "Rivers, racehorses and a wall coming down",
+  "title": "An army against emus and a concert on a roof",
   "sample": true,
   "questions": [
     {
-      "category": "Australian history",
-      "question": "In which year did Australia's six colonies federate to form the Commonwealth of Australia?",
-      "answer": "1901",
-      "explanation": "The Commonwealth came into being on 1 January 1901, with the ceremony held in Centennial Park, Sydney. Edmund Barton became the first prime minister.",
-      "source": "National Archives of Australia"
+      "category": "Canberra",
+      "question": "Lake Burley Griffin is named after the American architect who designed Canberra, but he died in 1937 without ever seeing it. In which decade was the lake finally filled?",
+      "answer": "The 1960s",
+      "explanation": "Scrivener Dam was closed in 1963, the lake filled in 1964 and Robert Menzies opened it that October. Griffin's original plan dates from 1912.",
+      "source": "National Capital Authority"
     },
     {
-      "category": "Australian geography",
-      "question": "Which is the longest river in Australia?",
-      "answer": "The Murray",
-      "explanation": "The Murray runs about 2,508 km from the Australian Alps to the sea in South Australia, and forms much of the border between New South Wales and Victoria. The Darling is second at roughly 1,470 km.",
-      "source": "Geoscience Australia, Longest Rivers"
+      "category": "Borders",
+      "question": "Western Australia's entire land border follows a single line of longitude, the 129th meridian east. Which two jurisdictions lie on the other side of it?",
+      "answer": "The Northern Territory and South Australia",
+      "explanation": "At about 1,860 kilometres it is one of the longest straight borders in the world. Surveying errors mean the two halves do not quite meet at Surveyor Generals Corner.",
+      "source": "Geoscience Australia; Landgate WA"
     },
     {
-      "category": "Australian history",
-      "question": "The Eureka Stockade rebellion of 1854 took place on the goldfields of which town?",
-      "answer": "Ballarat",
-      "explanation": "Miners at Ballarat, protesting licence fees and a lack of political representation, were attacked by government troops on 3 December 1854. The battle lasted about 15 minutes.",
-      "source": "National Museum of Australia, Defining Moments"
+      "category": "Politics",
+      "question": "Prime Minister Harold Holt disappeared while swimming on 17 December 1967. Off which Victorian beach, near Portsea, was he last seen?",
+      "answer": "Cheviot Beach",
+      "explanation": "His body was never found. Melbourne later named a municipal swimming pool after him, in Glen Iris, in the electorate he had represented.",
+      "source": "National Archives of Australia; National Museum of Australia"
     },
     {
-      "category": "Australian geography",
-      "question": "Which Australian capital city sits on the River Derwent?",
-      "answer": "Hobart",
-      "explanation": "The Derwent rises at Lake St Clair in the central highlands and reaches the sea at Hobart, where its estuary is the finish line of the Sydney to Hobart yacht race.",
-      "source": "Geoscience Australia"
+      "category": "Money",
+      "question": "The Australian $50 note carries the inventor and writer David Unaipon on one side. Which woman, the first elected to an Australian parliament, is on the other?",
+      "answer": "Edith Cowan",
+      "explanation": "Cowan won the seat of West Perth in the Western Australian Legislative Assembly in 1921. The note also shows the original Parliament House in Perth.",
+      "source": "Reserve Bank of Australia"
     },
     {
-      "category": "Nature",
-      "question": "The platypus is a monotreme, a mammal that lays eggs. Which other animal belongs to this group?",
-      "answer": "The echidna",
-      "explanation": "The platypus and four species of echidna are the only living monotremes. All are found in Australia or New Guinea.",
-      "source": "Australian Museum"
+      "category": "Outback",
+      "question": "In which South Australian opal-mining town do many residents live in underground homes known as dugouts, to escape the summer heat?",
+      "answer": "Coober Pedy",
+      "explanation": "The town also has underground churches and hotels. Its name is usually said to come from Aboriginal words meaning, roughly, white man's hole.",
+      "source": "District Council of Coober Pedy; South Australian Tourism Commission"
     },
     {
-      "category": "Australian politics",
-      "question": "Who was Australia's first female prime minister?",
-      "answer": "Julia Gillard",
-      "explanation": "Gillard held the office from June 2010 to June 2013. She was born in Barry, Wales, and migrated to Adelaide as a child.",
-      "source": "National Archives of Australia, Australia's Prime Ministers"
+      "category": "History",
+      "question": "In late 1932, soldiers armed with Lewis machine guns were sent to cull emus that were destroying wheat crops, an episode now called the Emu War. In which state did it take place?",
+      "answer": "Western Australia",
+      "explanation": "The operation, around Campion in the wheatbelt, was led by Major G. P. W. Meredith. The emus scattered too quickly to be hit in numbers and the army withdrew within weeks.",
+      "source": "National Museum of Australia; National Archives of Australia"
     },
     {
-      "category": "Technology",
-      "question": "Research patented by CSIRO scientists in the 1990s became a core part of which everyday wireless technology?",
-      "answer": "Wi-Fi",
-      "explanation": "A CSIRO team led by John O'Sullivan solved the problem of radio signals echoing indoors, work that grew out of radio astronomy. The patent later earned the agency hundreds of millions of dollars.",
-      "source": "CSIRO, Wireless LAN"
+      "category": "Flag",
+      "question": "Four of the five stars in the Southern Cross on the Australian flag have seven points. How many points does the fifth and smallest star, Epsilon Crucis, have?",
+      "answer": "Five",
+      "explanation": "The large Commonwealth Star beneath the Union Jack also has seven points: one for each of the six states and one for the territories.",
+      "source": "Department of the Prime Minister and Cabinet, Australian National Flag"
     },
     {
-      "category": "Australian history",
-      "question": "In 1928 Charles Kingsford Smith and his crew made the first flight across the Pacific from the United States to Australia. What was their aircraft called?",
-      "answer": "Southern Cross",
-      "explanation": "The Fokker trimotor flew from Oakland, California, to Brisbane with stops in Hawaii and Fiji. It is on display near Brisbane Airport.",
-      "source": "National Museum of Australia, Defining Moments"
+      "category": "Environment",
+      "question": "On 1 July 1983 the High Court ruled that the Commonwealth could stop a hydro-electric dam being built in the Tasmanian wilderness. Which river did the decision save?",
+      "answer": "The Franklin",
+      "explanation": "The dam was to be built on the Gordon River, below its junction with the Franklin. The blockade that preceded the case saw more than 1,200 people arrested.",
+      "source": "High Court of Australia, Commonwealth v Tasmania (1983); National Museum of Australia"
     },
     {
-      "category": "Australian geography",
-      "question": "What is the largest lake in Australia?",
-      "answer": "Kati Thanda-Lake Eyre",
-      "explanation": "The South Australian salt lake fills completely only a few times a century. Its lowest point, about 15 metres below sea level, is the lowest natural point on the Australian mainland.",
-      "source": "Geoscience Australia, Largest Waterbodies"
+      "category": "Rail",
+      "question": "The Indian Pacific crosses the Nullarbor on the longest dead-straight stretch of railway in the world. Is it closest to 280, 480 or 680 kilometres long?",
+      "answer": "480 kilometres",
+      "explanation": "The straight runs for 478 kilometres between Ooldea in South Australia and Loongana in Western Australia without a single curve.",
+      "source": "Guinness World Records; Journey Beyond Rail"
     },
     {
-      "category": "Food",
-      "question": "Which nut is native to the rainforests of Queensland and northern New South Wales?",
-      "answer": "Macadamia",
-      "explanation": "The botanist Ferdinand von Mueller named the genus in 1857 after his friend John Macadam. Aboriginal people had been eating the nuts for thousands of years.",
-      "source": "Australian National Botanic Gardens"
+      "category": "The Hidden Town",
+      "question": "An Australian town is hiding inside this sentence, its letters in order and unbroken across the words: \"The global ban yielded few results.\" Which town is it?",
+      "answer": "Albany",
+      "explanation": "It runs from the end of global through ban to the start of yielded. Albany, on the south coast of Western Australia, was the last Australian port many Anzac troops saw in 1914.",
+      "source": "Checked by inspection; City of Albany"
     },
     {
-      "category": "World geography",
-      "question": "Lake Baikal, the deepest lake in the world, is in which country?",
-      "answer": "Russia",
-      "explanation": "Baikal, in Siberia, reaches a depth of more than 1,600 metres and holds roughly a fifth of the world's unfrozen surface fresh water.",
-      "source": "UNESCO World Heritage List, Lake Baikal"
+      "category": "Geography",
+      "question": "Thanks to islands scattered either side of both the equator and the 180th meridian, which Pacific nation is the only country in the world to sit in all four hemispheres?",
+      "answer": "Kiribati",
+      "explanation": "Its 33 islands are spread over an area of ocean about as wide as the continental United States. The name is pronounced Kiribas.",
+      "source": "CIA World Factbook; Government of Kiribati"
     },
     {
-      "category": "World history",
-      "question": "In which year did the Berlin Wall come down?",
-      "answer": "1989",
-      "explanation": "The border was opened on 9 November 1989, after 28 years. Germany was formally reunified in October 1990.",
-      "source": "Berlin Wall Foundation"
+      "category": "Geography",
+      "question": "Istanbul is split between Europe and Asia by a narrow strait that links the Black Sea to the Sea of Marmara. What is the strait called?",
+      "answer": "The Bosphorus",
+      "explanation": "At its narrowest it is about 700 metres wide. A rail tunnel under the strait, the Marmaray, opened in 2013.",
+      "source": "Encyclopaedia Britannica, Bosporus"
     },
     {
-      "category": "Science",
-      "question": "Which gas makes up most of Earth's atmosphere?",
-      "answer": "Nitrogen",
-      "explanation": "Nitrogen accounts for about 78 per cent of dry air. Oxygen is about 21 per cent, and carbon dioxide is well under a tenth of one per cent.",
-      "source": "NASA Earth Fact Sheet"
-    },
-    {
-      "category": "World geography",
-      "question": "Mount Kilimanjaro, the highest mountain in Africa, is in which country?",
-      "answer": "Tanzania",
-      "explanation": "Kilimanjaro stands 5,895 metres high in north-eastern Tanzania, close to the Kenyan border. It is a dormant volcano.",
-      "source": "UNESCO World Heritage List, Kilimanjaro National Park"
+      "category": "History",
+      "question": "The shortest war on record was fought on 27 August 1896 and was over in well under an hour. Britain's opponent was which island sultanate off the coast of East Africa?",
+      "answer": "Zanzibar",
+      "explanation": "Most accounts put the fighting at between 38 and 45 minutes. It began when a new sultan took power without British approval.",
+      "source": "Encyclopaedia Britannica, Anglo-Zanzibar War"
     },
     {
       "category": "Science",
-      "question": "What is the chemical symbol for sodium?",
-      "answer": "Na",
-      "explanation": "It comes from natrium, the element's Latin name. Potassium's symbol, K, has a similar origin in kalium.",
+      "question": "Only two chemical elements are liquid at ordinary room temperature. Mercury is one. Which reddish-brown non-metal is the other?",
+      "answer": "Bromine",
+      "explanation": "Its name comes from the Greek for stench. Caesium and gallium melt just above room temperature, close enough to turn liquid in a warm hand.",
       "source": "Royal Society of Chemistry, Periodic Table"
     },
     {
-      "category": "World geography",
-      "question": "Which is the largest of the world's oceans?",
-      "answer": "The Pacific",
-      "explanation": "The Pacific covers about a third of the Earth's surface, more than all the land on the planet combined.",
-      "source": "NOAA, National Ocean Service"
+      "category": "Space",
+      "question": "On 12 April 1961 Yuri Gagarin became the first person in space, completing a single orbit of the Earth in 108 minutes. What was his spacecraft called?",
+      "answer": "Vostok 1",
+      "explanation": "Gagarin did not land inside the capsule. He ejected at about seven kilometres and came down by parachute, a detail the Soviet Union kept quiet for years.",
+      "source": "NASA; European Space Agency"
     },
     {
-      "category": "World geography",
-      "question": "What is the smallest country in the world by area?",
-      "answer": "Vatican City",
-      "explanation": "It covers less than half a square kilometre, entirely within the city of Rome.",
-      "source": "Encyclopaedia Britannica, Vatican City"
+      "category": "Culture",
+      "question": "Which African country uses a calendar of 13 months, which runs seven to eight years behind the calendar used in most of the world?",
+      "answer": "Ethiopia",
+      "explanation": "Twelve months have 30 days each and the thirteenth has five, or six in a leap year. Ethiopia celebrated the start of its year 2000 in September 2007.",
+      "source": "Encyclopaedia Britannica, Ethiopian calendar"
     },
     {
-      "category": "Language",
-      "question": "How many letters are there in the Greek alphabet?",
-      "answer": "24",
-      "explanation": "It runs from alpha to omega. The word alphabet comes from its first two letters, alpha and beta.",
-      "source": "Encyclopaedia Britannica, Greek alphabet"
+      "category": "History",
+      "question": "The Rosetta Stone, which repeats one decree in three scripts and unlocked Egyptian hieroglyphs, was found by French soldiers in 1799. In which museum has it been displayed since 1802?",
+      "answer": "The British Museum",
+      "explanation": "The three scripts are hieroglyphic, demotic and ancient Greek. Jean-François Champollion announced his decipherment in 1822.",
+      "source": "The British Museum"
     },
     {
-      "category": "Science",
-      "question": "What is the hardest naturally occurring substance?",
-      "answer": "Diamond",
-      "explanation": "Diamond is pure carbon and scores 10 on the Mohs scale of hardness. Graphite, also pure carbon, is one of the softest minerals.",
-      "source": "Geological Society of London"
+      "category": "Medicine",
+      "question": "People with which blood type are known as universal donors, because their red blood cells can be given to almost any patient in an emergency?",
+      "answer": "O negative",
+      "explanation": "Fewer than one in ten Australians has it, which is why blood services so often appeal for O negative donors.",
+      "source": "Australian Red Cross Lifeblood"
     },
     {
-      "category": "World geography",
-      "question": "What is the longest river in South America?",
-      "answer": "The Amazon",
-      "explanation": "The Amazon carries more water than any other river on Earth, about a fifth of all the river water that reaches the oceans.",
-      "source": "Encyclopaedia Britannica, Amazon River"
+      "category": "Geography",
+      "question": "A doubly landlocked country is one surrounded entirely by other landlocked countries. Only two exist, one in Europe and one in Central Asia. Name either.",
+      "answer": "Liechtenstein or Uzbekistan",
+      "explanation": "Liechtenstein sits between Switzerland and Austria. Uzbekistan is bordered by five countries, none of which has a coastline on the open sea.",
+      "source": "CIA World Factbook"
     },
     {
-      "category": "Sport",
-      "question": "Which horse won the Melbourne Cup three years in a row, in 2003, 2004 and 2005?",
-      "answer": "Makybe Diva",
-      "explanation": "Makybe Diva is the only horse to win the Cup three times. Phar Lap, for all his fame, won it once, in 1930.",
-      "source": "Victoria Racing Club, Melbourne Cup honour roll"
+      "category": "History",
+      "question": "News that Edmund Hillary and Tenzing Norgay had reached the summit of Everest was held back so that it broke in London on the morning of which royal occasion in June 1953?",
+      "answer": "The coronation of Queen Elizabeth II",
+      "explanation": "They reached the top on 29 May. The Times correspondent James Morris sent the news in code to protect the scoop, and it was published on 2 June.",
+      "source": "Royal Geographical Society; The Times archive"
     },
     {
-      "category": "Film",
-      "question": "Which Australian-made film won the Academy Award for Best Animated Feature in 2007?",
-      "answer": "Happy Feet",
-      "explanation": "George Miller's Happy Feet, animated in Sydney, won at the 79th Academy Awards. Miller is better known for the Mad Max films.",
-      "source": "Academy of Motion Picture Arts and Sciences, 79th Awards"
+      "category": "Cricket",
+      "question": "Don Bradman needed four runs in his final Test innings, at The Oval in 1948, to retire with an average of 100. Which English leg-spinner bowled him for a duck, second ball?",
+      "answer": "Eric Hollies",
+      "explanation": "Bradman finished on 99.94. Hollies took more wickets in his first-class career than he scored runs.",
+      "source": "ESPNcricinfo; Bradman Museum"
+    },
+    {
+      "category": "Racing",
+      "question": "Which mare is the only horse to have won the Cox Plate four times, doing so in consecutive years from 2015 to 2018?",
+      "answer": "Winx",
+      "explanation": "She retired in 2019 on a run of 33 consecutive wins. Her first foal to reach the sale ring sold for $10 million in 2024.",
+      "source": "Moonee Valley Racing Club; Racing Australia"
+    },
+    {
+      "category": "Olympics",
+      "question": "Australia's strict animal quarantine laws meant the equestrian events of the 1956 Melbourne Olympics were held months earlier and half a world away. In which city?",
+      "answer": "Stockholm",
+      "explanation": "It is the only time events from one Olympic Games have been held on two continents. Stockholm had hosted the full Games in 1912.",
+      "source": "International Olympic Committee"
     },
     {
       "category": "Music",
-      "question": "Which band released the 1987 album Diesel and Dust, featuring the song Beds Are Burning?",
-      "answer": "Midnight Oil",
-      "explanation": "Midnight Oil wrote the album after touring remote Aboriginal communities in 1986. Beds Are Burning is about returning land to the Pintupi people.",
+      "question": "In 2010 the Federal Court found that the flute riff in Men at Work's Down Under reproduced part of which children's song, written in 1932 for a Girl Guides competition?",
+      "answer": "Kookaburra Sits in the Old Gum Tree",
+      "explanation": "The song was written by Marion Sinclair, a Melbourne teacher. The publisher that owned the rights was awarded five per cent of the song's royalties from 2002.",
+      "source": "Federal Court of Australia, Larrikin Music v EMI Songs (2010)"
+    },
+    {
+      "category": "Football",
+      "question": "Which is the only country to have played at every men's FIFA World Cup since the tournament began in 1930?",
+      "answer": "Brazil",
+      "explanation": "Brazil has also won it more often than anyone else. Germany and Italy have each missed at least two tournaments.",
+      "source": "FIFA"
+    },
+    {
+      "category": "Music",
+      "question": "The Beatles' last public performance was an unannounced lunchtime concert in London on 30 January 1969, which police eventually asked them to turn down. Where did they play it?",
+      "answer": "On the roof of their Apple headquarters in Savile Row",
+      "explanation": "The set lasted about 42 minutes. It ends the film Let It Be and takes up much of the final part of Peter Jackson's Get Back.",
+      "source": "The Beatles, official site; British Film Institute"
+    },
+    {
+      "category": "Film",
+      "question": "Which Japanese director made Seven Samurai in 1954, the film Hollywood remade six years later as the western The Magnificent Seven?",
+      "answer": "Akira Kurosawa",
+      "explanation": "His Yojimbo was remade as A Fistful of Dollars, and George Lucas has said The Hidden Fortress helped shape Star Wars.",
+      "source": "British Film Institute; The Criterion Collection"
+    },
+    {
+      "category": "Books",
+      "question": "Peter Carey won his second Booker Prize in 2001 for a novel written as if in the unpunctuated voice of a bushranger. What is it called?",
+      "answer": "True History of the Kelly Gang",
+      "explanation": "Carey drew on the style of Ned Kelly's Jerilderie Letter. His first Booker was for Oscar and Lucinda in 1988.",
+      "source": "The Booker Prizes"
+    },
+    {
+      "category": "Film",
+      "question": "In the 1997 film The Castle, the Kerrigan family's holiday house is beside a lake in which real Victorian town, where Darryl admires the serenity?",
+      "answer": "Bonnie Doon",
+      "explanation": "The town is on Lake Eildon, north-east of Melbourne. The film was shot in 11 days.",
       "source": "National Film and Sound Archive of Australia"
     },
     {
-      "category": "Sport",
-      "question": "Which of the four tennis Grand Slam tournaments is played on clay?",
-      "answer": "The French Open (Roland Garros)",
-      "explanation": "The French Open is played on red clay at Roland Garros in Paris. Wimbledon is on grass, and the Australian and US Opens are on hard courts.",
-      "source": "International Tennis Federation"
-    },
-    {
-      "category": "Literature",
-      "question": "Which Australian author won the Nobel Prize in Literature in 1973?",
-      "answer": "Patrick White",
-      "explanation": "Patrick White, author of Voss and The Tree of Man, remains the only Australian to win the literature prize. He used the money to establish an award for under-recognised Australian writers.",
-      "source": "NobelPrize.org, Literature 1973"
-    },
-    {
-      "category": "Sport",
-      "question": "In Australian rules football, how many players does each team have on the field?",
-      "answer": "18",
-      "explanation": "Each side also has an interchange bench. The AFLW competition plays with 16 a side.",
-      "source": "AFL, Laws of Australian Football"
-    },
-    {
       "category": "Film",
-      "question": "Who directed the 1975 film Jaws?",
-      "answer": "Steven Spielberg",
-      "explanation": "He was 28 at the time. The mechanical shark broke down so often that it appears on screen far less than planned, which is widely credited with making the film more frightening.",
-      "source": "American Film Institute Catalog"
-    },
-    {
-      "category": "Music",
-      "question": "Which Italian composer wrote The Four Seasons?",
-      "answer": "Antonio Vivaldi",
-      "explanation": "The four violin concertos were published in 1725. Vivaldi was a priest, known as the Red Priest for the colour of his hair.",
-      "source": "Encyclopaedia Britannica, Antonio Vivaldi"
-    },
-    {
-      "category": "Art",
-      "question": "Which bushranger is the subject of Sidney Nolan's best-known series of paintings?",
-      "answer": "Ned Kelly",
-      "explanation": "Nolan painted the main series in 1946 and 1947, showing Kelly's helmet as a flat black square. Most of the paintings are held by the National Gallery of Australia.",
-      "source": "National Gallery of Australia"
-    },
-    {
-      "category": "Television",
-      "question": "In the ABC children's series Bluey, what breed of dog is Bluey?",
-      "answer": "Blue heeler (Australian cattle dog)",
-      "explanation": "The series is made by Ludo Studio in Brisbane and first aired in 2018. Bluey's sister Bingo is a red heeler.",
-      "source": "ABC; Ludo Studio"
+      "question": "Cate Blanchett won her first Academy Award for playing another Oscar-winning actress in Martin Scorsese's The Aviator. Whom did she play?",
+      "answer": "Katharine Hepburn",
+      "explanation": "It made Blanchett the first person to win an Oscar for portraying an Oscar winner. Hepburn herself won four, still the record for an actor.",
+      "source": "Academy of Motion Picture Arts and Sciences"
     }
   ]
 }
