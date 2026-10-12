@@ -66,3 +66,4 @@
 }
 .ed-bar .btn-quiet { background: transparent; color: var(--on-slab); border-color: var(--on-slab); }
 .ed-bar .btn-quiet:hover { background: var(--on-slab); color: var(--slab); }
+#ed-msg { scroll-margin-bottom: 7rem; }

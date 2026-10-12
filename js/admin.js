@@ -321,7 +321,7 @@
     const el = document.getElementById('ed-msg');
     el.className = `msg ${kind}`;
     el.innerHTML = html;
-    el.scrollIntoView({ block: 'nearest' });
+    el.scrollIntoView({ block: 'center' });
   }
 
   function startPublish() {
@@ -331,17 +331,16 @@
       confirming = false;
       return;
     }
-    if (!settings.token) {
-      showMsg('bad', '<p>Publishing needs an access key. Go back to All quizzes and set up Publishing access, then return to this draft.</p>');
-      return;
-    }
     confirming = true;
     const when = current.date > todayISO() ? `It will appear on the site on ${esc(formatDate(current.date))}.` : 'It will appear on the site within a few minutes.';
     showMsg('', `<p>Publish No. ${esc(current.number)}, “${esc(current.title.trim())}”, for ${esc(formatDate(current.date))}? ${when}</p>
       ${warnings.length ? `<ul>${warnings.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>` : ''}
-      <div class="actions"><button type="button" class="btn btn-small" data-action="confirm-publish">Publish now</button>
-      <button type="button" class="btn btn-quiet btn-small" data-action="cancel-publish">Not yet</button></div>`);
-    document.querySelector('[data-action="confirm-publish"]').focus();
+      <div class="actions">
+        ${settings.token ? '<button type="button" class="btn btn-small" data-action="confirm-publish">Publish now</button>' : ''}
+        <button type="button" class="btn ${settings.token ? 'btn-quiet ' : ''}btn-small" data-action="upload-publish">Publish by upload</button>
+        <button type="button" class="btn btn-quiet btn-small" data-action="cancel-publish">Not yet</button></div>
+      <p class="help">${settings.token ? 'Publish now sends the quiz straight to GitHub. If your browser blocks that, use Publish by upload instead.' : 'Publish by upload saves two files that you then drag onto GitHub. No access key needed.'}</p>`);
+    document.querySelector('[data-action="confirm-publish"], [data-action="upload-publish"]').focus();
   }
 
   async function publish() {
@@ -370,6 +369,49 @@
       const text = e instanceof PublishError ? e.message : 'The connection to GitHub failed. Check your internet connection and press Publish again. Your draft is safe.';
       showMsg('bad', `<p>${esc(text)}</p>`);
     }
+  }
+
+  function saveFile(name, text) {
+    const blob = new Blob([text], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+
+  // Publishing without the GitHub API: build both files, the user drags them onto GitHub's upload page.
+  let pending = null;
+  async function startUpload() {
+    showMsg('', '<p>Preparing the files…</p>');
+    let list;
+    try {
+      const res = await fetch(`quizzes/index.json?t=${Date.now()}`, { cache: 'no-store' });
+      if (!res.ok) throw new Error();
+      list = (await res.json()).quizzes || [];
+    } catch (e) {
+      showMsg('bad', '<p>The current list of quizzes could not be loaded from the site, so the files could not be prepared. Reload the page and try again.</p>');
+      return;
+    }
+    const d = current;
+    const next = list.filter((q) => q.id !== d.date && q.id !== d.originalId);
+    next.push(manifestEntry(d));
+    next.sort((a, b) => (a.date < b.date ? 1 : -1));
+    pending = {
+      key: d.key,
+      quizName: `${d.date}.json`,
+      quizText: JSON.stringify(quizFile(d), null, 2) + '\n',
+      indexText: JSON.stringify({ quizzes: next }, null, 2) + '\n',
+    };
+    const uploadUrl = `https://github.com/${encodeURIComponent(settings.owner)}/${encodeURIComponent(settings.repo)}/upload/${encodeURIComponent(settings.branch)}/quizzes`;
+    showMsg('', `<p>Publish by upload: four steps.</p>
+      <ol class="steps-list">
+        <li><button type="button" class="btn btn-small" data-action="dl-quiz">Download ${esc(pending.quizName)}</button></li>
+        <li><button type="button" class="btn btn-small" data-action="dl-index">Download index.json</button> <span class="help">The updated list of quizzes.</span></li>
+        <li><a class="btn btn-small" href="${uploadUrl}" target="_blank" rel="noopener">Open GitHub upload page</a> <span class="help">Signed in to GitHub, drag both downloaded files onto the page. It is already set to the quizzes folder. GitHub will say index.json replaces the existing file; that is expected.</span></li>
+        <li>Click <strong>Commit changes</strong> on GitHub, then come back and press <button type="button" class="btn btn-quiet btn-small" data-action="upload-done">I've committed them</button></li>
+      </ol>
+      <p class="help">The site updates a few minutes after you commit. Your draft is kept until you press the last button.</p>`);
   }
 
   function download() {
@@ -426,6 +468,13 @@
       else if (a === 'preview') renderPreview();
       else if (a === 'close-preview') document.getElementById('preview').innerHTML = '';
       else if (a === 'download') download();
+      else if (a === 'upload-publish') { confirming = false; startUpload(); }
+      else if (a === 'dl-quiz' && pending) saveFile(pending.quizName, pending.quizText);
+      else if (a === 'dl-index' && pending) saveFile('index.json', pending.indexText);
+      else if (a === 'upload-done' && pending) {
+        delete drafts[pending.key]; saveDrafts(); pending = null;
+        renderHome('<p>Done. Once GitHub has rebuilt the site, in a few minutes, the quiz will be listed here and on the site (or on its release date, if that is in the future).</p>');
+      }
       else if (a === 'publish') startPublish();
       else if (a === 'confirm-publish' && confirming) publish();
       else if (a === 'cancel-publish') { confirming = false; showMsg('', ''); }
