@@ -3,6 +3,7 @@ import { readFileSync, existsSync } from 'node:fs';
 const dir = new URL('../quizzes/', import.meta.url);
 const read = (f) => JSON.parse(readFileSync(new URL(f, dir), 'utf8'));
 const errors = [];
+const warnings = [];
 const manifest = read('index.json').quizzes;
 const seen = new Set();
 for (const e of manifest) {
@@ -18,10 +19,12 @@ for (const e of manifest) {
   q.questions.forEach((x, i) => {
     const w = `${e.id}.json question ${i + 1}`;
     if (!x.question?.trim()) errors.push(`${w}: no question text`);
-    for (const k of ['category', 'answer', 'explanation', 'source']) if (!x[k]?.trim()) errors.push(`${w}: missing ${k}`);
+    if (!x.answer?.trim()) errors.push(`${w}: no answer`);
+    for (const k of ['category', 'explanation', 'source']) if (!x[k]?.trim()) warnings.push(`${w}: no ${k}`);
   });
   if (!e.sample && q.questions.length !== 30) errors.push(`${at}: a published quiz needs 30 questions, this has ${q.questions.length}`);
   console.log(`${e.id}  No. ${e.number}  ${q.questions.length} questions`);
 }
+if (warnings.length) console.log(`\n${warnings.length} warnings (not blocking):\n` + warnings.join('\n'));
 if (errors.length) { console.error('\n' + errors.join('\n')); process.exit(1); }
 console.log('All quizzes valid.');

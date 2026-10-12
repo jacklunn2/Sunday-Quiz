@@ -8,7 +8,7 @@
   'use strict';
 
   const SITE_NAME = 'The Sunday Quiz';
-  const SITE_URL = '';               // Set once the site has a public address; added to shared results.
+  const SITE_URL = 'https://jacklunn2.github.io/Sunday-Quiz/';   // Added to shared results. Change when the domain is set up.
   const TIME_ZONE = 'Australia/Sydney';
   const SECONDS_PER_QUESTION = 20;   // Used only for the "about N minutes" estimate.
 
