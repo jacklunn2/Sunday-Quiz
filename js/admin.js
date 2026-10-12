@@ -56,10 +56,10 @@
   /* ---------- GitHub ---------- */
   class PublishError extends Error {}
   function gh(path, opts = {}) {
-    const headers = { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+    const headers = { Accept: 'application/vnd.github+json' };
     if (settings.token) headers.Authorization = `Bearer ${settings.token}`;
     if (opts.body) headers['Content-Type'] = 'application/json';
-    return fetch(`https://api.github.com/repos/${encodeURIComponent(settings.owner)}/${encodeURIComponent(settings.repo)}/${path}`, { ...opts, headers, cache: 'no-store' });
+    return fetch(`https://api.github.com/repos/${encodeURIComponent(settings.owner)}/${encodeURIComponent(settings.repo)}/${path}`, { ...opts, headers });
   }
   function explain(status) {
     const where = `${settings.owner}/${settings.repo}`;
@@ -385,7 +385,7 @@
 
   async function saveAccess() {
     const msg = document.getElementById('access-msg');
-    const token = document.getElementById('set-token').value.trim();
+    const token = document.getElementById('set-token').value.replace(/\s+/g, '');
     const repo = document.getElementById('set-repo').value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '');
     const [owner, name] = repo.split('/');
     if (!owner || !name) { msg.className = 'msg bad'; msg.textContent = 'Enter the repository as owner/name, for example jacklunn2/Sunday-Quiz.'; return; }
@@ -403,7 +403,9 @@
     } catch (e) {
       settings = previous;
       msg.className = 'msg bad';
-      msg.textContent = e instanceof PublishError ? e.message : 'Could not reach GitHub. Check your internet connection and try again.';
+      if (e instanceof PublishError) msg.textContent = e.message;
+      else if (/[^\x21-\x7e]/.test(settings.token || token)) msg.textContent = 'The access key contains characters a GitHub key never has, so it was probably copied incorrectly. Copy it again from GitHub and paste it in.';
+      else msg.innerHTML = `Your browser could not reach GitHub (api.github.com). Something on this computer or network may be blocking it, such as a privacy extension, antivirus web protection, a VPN or a network filter. To check, open <strong>api.github.com</strong> in a new tab: it should show a page of text. <span class="help">Technical detail: ${esc(e && e.message ? e.message : String(e))}</span>`;
     }
   }
 
