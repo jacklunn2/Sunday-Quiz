@@ -189,6 +189,7 @@
       <div class="actions">
         <button type="button" class="btn btn-small" data-action="save-access">Save and test</button>
         ${has ? '<button type="button" class="btn btn-quiet btn-small" data-action="forget-access">Remove key from this browser</button>' : ''}
+        <button type="button" class="btn btn-quiet btn-small" data-action="diagnose">Check connection</button>
       </div>
       <div class="msg" id="access-msg" role="status"></div>
     </details>`;
@@ -451,6 +452,23 @@
     }
   }
 
+  // Two requests that fail in different ways depending on what is blocking the editor.
+  async function diagnose() {
+    const msg = document.getElementById('access-msg');
+    msg.className = 'msg'; msg.textContent = 'Checking…';
+    const attempt = async (opts) => {
+      try { const r = await fetch('https://api.github.com/zen', opts); return r.ok ? 'ok' : `status ${r.status}`; }
+      catch (e) { return `blocked (${e && e.message ? e.message : e})`; }
+    };
+    const simple = await attempt({});
+    const withKey = await attempt({ headers: { Authorization: 'Bearer test' } });
+    let verdict;
+    if (simple === 'ok' && (withKey === 'ok' || withKey.startsWith('status'))) verdict = 'Both checks reached GitHub, so the connection works. If Save and test still fails, the access key itself is the problem: make a new one with Contents set to Read and write.';
+    else if (simple === 'ok') verdict = 'Basic requests work, but requests that carry an access key are being stopped before they reach GitHub. This is typical of antivirus or security software that inspects web traffic (for example Norton, McAfee, Avast, Kaspersky, Bitdefender or ESET), or a VPN. Try turning off its web or HTTPS protection briefly, or use another browser.';
+    else verdict = 'This browser is stopping the editor from contacting GitHub at all. That is usually a browser extension or a privacy setting. Try another browser, or a private window with extensions turned off.';
+    msg.innerHTML = `<p>${esc(verdict)}</p><p class="help">Check 1, basic request: ${esc(simple)}. Check 2, request with a key: ${esc(withKey)}.</p>`;
+  }
+
   /* ---------- events ---------- */
   root.addEventListener('click', async (e) => {
     const el = e.target.closest('[data-action]');
@@ -479,6 +497,7 @@
       else if (a === 'confirm-publish' && confirming) publish();
       else if (a === 'cancel-publish') { confirming = false; showMsg('', ''); }
       else if (a === 'save-access') saveAccess();
+      else if (a === 'diagnose') diagnose();
       else if (a === 'forget-access') { settings.token = ''; saveSettings(); renderHome('<p>The access key was removed from this browser.</p>'); }
     } catch (err) {
       el.disabled = false;
