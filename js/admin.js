@@ -59,7 +59,8 @@
     const headers = { Accept: 'application/vnd.github+json' };
     if (settings.token) headers.Authorization = `Bearer ${settings.token}`;
     if (opts.body) headers['Content-Type'] = 'application/json';
-    return fetch(`https://api.github.com/repos/${encodeURIComponent(settings.owner)}/${encodeURIComponent(settings.repo)}/${path}`, { ...opts, headers });
+    const base = `https://api.github.com/repos/${encodeURIComponent(settings.owner)}/${encodeURIComponent(settings.repo)}`;
+    return fetch(path ? `${base}/${path}` : base, { ...opts, headers });   // GitHub rejects a trailing slash
   }
   function explain(status) {
     const where = `${settings.owner}/${settings.repo}`;
@@ -463,7 +464,7 @@
     const simple = await attempt({});
     const withKey = await attempt({ headers: { Authorization: 'Bearer test' } });
     let verdict;
-    if (simple === 'ok' && (withKey === 'ok' || withKey.startsWith('status'))) verdict = 'Both checks reached GitHub, so the connection works. If Save and test still fails, the access key itself is the problem: make a new one with Contents set to Read and write.';
+    if (simple === 'ok' && (withKey === 'ok' || withKey.startsWith('status'))) verdict = 'Both checks reached GitHub, so the connection works. If Save and test still fails, check the access key has Contents set to Read and write for this repository.';
     else if (simple === 'ok') verdict = 'Basic requests work, but requests that carry an access key are being stopped before they reach GitHub. This is typical of antivirus or security software that inspects web traffic (for example Norton, McAfee, Avast, Kaspersky, Bitdefender or ESET), or a VPN. Try turning off its web or HTTPS protection briefly, or use another browser.';
     else verdict = 'This browser is stopping the editor from contacting GitHub at all. That is usually a browser extension or a privacy setting. Try another browser, or a private window with extensions turned off.';
     msg.innerHTML = `<p>${esc(verdict)}</p><p class="help">Check 1, basic request: ${esc(simple)}. Check 2, request with a key: ${esc(withKey)}.</p>`;
